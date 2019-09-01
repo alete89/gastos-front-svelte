@@ -15,7 +15,8 @@
     paga_iva: undefined,
     monto_iva: undefined,
     tags: undefined,
-    tarjeta: undefined
+    tarjeta: undefined,
+    comentario: undefined
   };
   let monedas = [];
   let tarjetas = [];
@@ -133,8 +134,13 @@
     </select>
   </FormGroup>
   <FormGroup>
-    <Label for="exampleText">Text Area</Label>
-    <Input type="textarea" name="text" id="exampleText" />
+    <Label for="comentario">Comentario</Label>
+    <Input
+      type="textarea"
+      placeholder="Comentario"
+      name="comentario"
+      id="comentario"
+      bind:value={gasto.comentario} />
   </FormGroup>
   <FormGroup>
     <input type="radio" bind:group={grupo} value="Uno" />
