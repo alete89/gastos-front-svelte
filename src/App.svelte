@@ -4,4 +4,4 @@
 </script>
 
 <Preview />
-<!-- <NewGasto /> -->
+<NewGasto />
