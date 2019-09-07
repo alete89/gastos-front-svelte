@@ -1,6 +1,7 @@
 <script>
   import { Button, Form, FormGroup, FormText, Input, Label } from "sveltestrap";
   import { onMount } from "svelte";
+  import { fetchMonedas, fetchTarjetas } from "../services/appService.js";
 
   let grupo = "";
   let listaCheck = [];
@@ -11,6 +12,9 @@
     moneda: undefined,
     cuotas: undefined,
     fecha: new Date().toISOString().slice(0, 10),
+    anio: undefined,
+    mes: undefined,
+    dia: undefined,
     mes_primer_resumen: undefined,
     paga_iva: undefined,
     monto_iva: undefined,
@@ -25,8 +29,8 @@
   onMount(doOnMount);
 
   async function doOnMount() {
-    await fetchMonedas();
-    await fetchTarjetas();
+    monedas = await fetchMonedas();
+    tarjetas = await fetchTarjetas();
     await firstSelectionWorkaround();
     console.log(gasto);
   }
@@ -36,20 +40,11 @@
     gasto.tarjeta = tarjetas[0].id;
   }
 
-  async function fetchMonedas() {
-    const response = await fetch("http://localhost:3000/monedas");
-    const json = await response.json();
-    monedas = json;
-  }
-
-  async function fetchTarjetas() {
-    const response = await fetch("http://localhost:3000/tarjetas");
-    const json = await response.json();
-    tarjetas = json;
-    console.log(tarjetas);
-  }
-
   async function handleSubmit() {
+    const fecha = new Date(gasto.fecha);
+    gasto.anio = fecha.getFullYear();
+    gasto.mes = fecha.getMonth();
+    gasto.dia = fecha.getDate() + 1;
     const response = await fetch("http://localhost:3000/gasto", {
       headers: {
         "Content-Type": "application/json"
@@ -65,7 +60,8 @@
 </script>
 
 <style>
-  .centrado {
+  .tarjeta {
+    background-color: #f9f7f7;
     margin: auto;
     margin-bottom: 2rem;
     margin-top: 4rem;
@@ -75,7 +71,7 @@
     text-align: center;
     font-size: 2rem;
     font-weight: bold;
-    background-color: black;
+    background-color: #112d4e;
     color: white;
   }
 
@@ -93,7 +89,7 @@
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
 </head>
 
-<div class="card centrado">
+<div class="card tarjeta">
   <div class="card-header titulo">Agregar gasto</div>
   <div class="margen">
     <Form>
