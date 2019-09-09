@@ -10,7 +10,7 @@
     Label,
     Button
   } from "sveltestrap";
-  import { getMeses } from "../meses.js";
+  import { getMeses } from "../services/monthService.js";
   import { fetchTarjetas, fetchGastos } from "../services/appService.js";
 
   let data = [];
