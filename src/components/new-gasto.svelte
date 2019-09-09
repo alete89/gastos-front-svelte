@@ -1,7 +1,7 @@
 <script>
   import { Button, Form, FormGroup, FormText, Input, Label } from "sveltestrap";
   import { onMount } from "svelte";
-  import { fetchMonedas, fetchTarjetas } from "../services/appService.js";
+  import { fetchMonedas, fetchTarjetas, crearGasto } from "../services/appService.js";
 
   let grupo = "";
   let listaCheck = [];
@@ -41,17 +41,7 @@
   }
 
   async function handleSubmit() {
-    const fecha = new Date(gasto.fecha);
-    gasto.anio = fecha.getFullYear();
-    gasto.mes = fecha.getMonth();
-    gasto.dia = fecha.getDate() + 1;
-    const response = await fetch("http://localhost:3000/gasto", {
-      headers: {
-        "Content-Type": "application/json"
-      },
-      method: "post",
-      body: JSON.stringify(gasto)
-    });
+    crearGasto(gasto)
   }
 
   async function handleTest() {

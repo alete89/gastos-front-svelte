@@ -12,7 +12,7 @@ export async function fetchTarjetas() {
 }
 
 
-export async function fetchGastos(mes,anio) {
+export async function fetchGastos(mes, anio) {
     let json = {};
     json.mes = mes;
     json.anio = anio;
@@ -30,4 +30,18 @@ export async function fetchGastos(mes,anio) {
             return gastos
         }
     }
+}
+
+export async function crearGasto(gasto) {
+    const fecha = new Date(gasto.fecha);
+    gasto.anio = fecha.getFullYear();
+    gasto.mes = fecha.getMonth();
+    gasto.dia = fecha.getDate() + 1;
+    const response = await fetch("http://localhost:3000/gasto", {
+        headers: {
+            "Content-Type": "application/json"
+        },
+        method: "post",
+        body: JSON.stringify(gasto)
+    });
 }
