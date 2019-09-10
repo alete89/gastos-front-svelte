@@ -1,7 +1,11 @@
 <script>
   import { Button, Form, FormGroup, FormText, Input, Label } from "sveltestrap";
   import { onMount } from "svelte";
-  import { fetchMonedas, fetchTarjetas, crearGasto } from "../services/appService.js";
+  import {
+    fetchMonedas,
+    fetchTarjetas,
+    crearGasto
+  } from "../services/appService.js";
 
   let grupo = "";
   let listaCheck = [];
@@ -11,11 +15,11 @@
     monto_total: undefined,
     moneda: undefined,
     cuotas: undefined,
-    fecha: new Date().toISOString().slice(0, 10),
+    fecha: fechaDeHoyFormateada(),
     anio: undefined,
     mes: undefined,
     dia: undefined,
-    mes_primer_resumen: undefined,
+    fecha_primer_resumen: undefined,
     paga_iva: undefined,
     monto_iva: undefined,
     tags: undefined,
@@ -27,6 +31,16 @@
   let somevalue = "";
 
   onMount(doOnMount);
+
+  function fechaDeHoyFormateada() {
+    const hoy = new Date();
+    return `${hoy.getFullYear()}-${agregarCero(hoy.getMonth() + 1)}-${agregarCero(hoy.getDate())}`;
+  }
+
+  function agregarCero(dia){
+    if(dia < 10) return `0${dia}`
+    else return dia
+  }
 
   async function doOnMount() {
     monedas = await fetchMonedas();
@@ -41,7 +55,7 @@
   }
 
   async function handleSubmit() {
-    crearGasto(gasto)
+    crearGasto(gasto);
   }
 
   async function handleTest() {

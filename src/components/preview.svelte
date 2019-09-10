@@ -129,7 +129,7 @@
             <td>{gasto.moneda.nombre}</td>
             <td>{gasto.cuotas}</td>
             <td>{new Date(gasto.fecha).toISOString().slice(0, 10)}</td>
-            <td>{gasto.mes_primer_resumen}</td>
+            <td>{new Date(gasto.fecha_primer_resumen).getMonth() + 1}</td>
             <td>{gasto.paga_iva}</td>
             <td>{gasto.monto_iva}</td>
             <td>{gasto.tags.map(g => g.nombre)}</td>
