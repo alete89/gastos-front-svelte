@@ -1,3 +1,16 @@
+export async function fetchAnios(tarjeta) {
+    let json = {};
+    json.id_tarjeta = tarjeta.id;
+    const response = await fetch("http://localhost:3000/anios/", {
+        headers: {
+            "Content-Type": "application/json"
+        },
+        method: "put",
+        body: JSON.stringify(json)
+    })
+    return await response.json()
+}
+
 export function getMeses() {
     let meses = [
         mes("Enero", 0),

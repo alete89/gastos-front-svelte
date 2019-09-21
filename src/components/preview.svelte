@@ -10,7 +10,7 @@
     Label,
     Button
   } from "sveltestrap";
-  import { getMeses } from "../services/monthService.js";
+  import { getMeses, fetchAnios } from "../services/monthService.js";
   import { fetchTarjetas, fetchGastos } from "../services/appService.js";
 
   let data = [];
@@ -19,12 +19,13 @@
   let meses = getMeses();
   let anio = hoy.getFullYear();
   let mes = hoy.getMonth();
-  let anios = [2018, 2019, 2020, 2021, 2022];
+  let anios = [];
   let error = "";
   let color = "primary";
 
   onMount(async function() {
     tarjetas = await fetchTarjetas();
+    anios = await fetchAnios(tarjetas[0]);
     await getGastos();
   });
 
