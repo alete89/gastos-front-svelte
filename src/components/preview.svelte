@@ -19,18 +19,20 @@
   let meses = getMeses();
   let anio = hoy.getFullYear();
   let mes = hoy.getMonth();
+  let tarjeta;
   let anios = [];
   let error = "";
   let color = "primary";
 
   onMount(async function() {
     tarjetas = await fetchTarjetas();
-    anios = await fetchAnios(tarjetas[0]);
+    tarjeta = tarjetas[0]
+    anios = await fetchAnios(tarjeta);
     await getGastos();
   });
 
   async function getGastos() {
-    data = await fetchGastos(mes, anio);
+    data = await fetchGastos(mes, anio, tarjeta);
   }
 
   function formatDate(ISOString) {
@@ -53,10 +55,6 @@
   .selector {
     margin: 1rem;
   }
-  .centrado {
-    /* margin: auto;
-    width: 80% !important; */
-  }
 </style>
 
 <head>
@@ -72,6 +70,20 @@
 
 <div class="centrado">
   <section class="selectores">
+    <FormGroup>
+      <div class="selector">
+        <Label for="tarjetaSelect" />
+        <select
+          on:change={getGastos}
+          bind:value={tarjeta}
+          name="tarjeta"
+          id="tarjetaSelect">
+          {#each tarjetas as tarjeta}
+            <option value={tarjeta}>{tarjeta.nombre}</option>
+          {/each}
+        </select>
+      </div>
+    </FormGroup>
     <div class="selector">
       <FormGroup>
         <Label for="anioSelect" />

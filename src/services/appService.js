@@ -12,10 +12,11 @@ export async function fetchTarjetas() {
 }
 
 
-export async function fetchGastos(mes, anio) {
+export async function fetchGastos(mes, anio, tarjeta) {
     let json = {};
     json.mes = mes;
     json.anio = anio;
+    json.id_tarjeta = tarjeta.id;
     const response = await fetch("http://localhost:3000/gastos/mes", {
         headers: {
             "Content-Type": "application/json"
