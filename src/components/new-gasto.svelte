@@ -34,12 +34,14 @@
 
   function fechaDeHoyFormateada() {
     const hoy = new Date();
-    return `${hoy.getFullYear()}-${agregarCero(hoy.getMonth() + 1)}-${agregarCero(hoy.getDate())}`;
+    return `${hoy.getFullYear()}-${agregarCero(
+      hoy.getMonth() + 1
+    )}-${agregarCero(hoy.getDate())}`;
   }
 
-  function agregarCero(dia){
-    if(dia < 10) return `0${dia}`
-    else return dia
+  function agregarCero(dia) {
+    if (dia < 10) return `0${dia}`;
+    else return dia;
   }
 
   async function doOnMount() {
@@ -161,24 +163,6 @@
       <FormGroup>
         <Label for="exampleText">Text Area</Label>
         <Input type="textarea" name="text" id="exampleText" />
-      </FormGroup>
-      <FormGroup>
-        <input type="radio" bind:group={grupo} value="Uno" />
-        Uno
-        <input type="radio" bind:group={grupo} value="Dos" />
-        Dos
-        <input type="radio" bind:group={grupo} value="Tres" />
-        Tres
-      </FormGroup>
-      <FormGroup>
-        <input type="checkbox" bind:group={listaCheck} value="A" />
-        A
-        <input type="checkbox" bind:group={listaCheck} value="B" />
-        B
-        <input type="checkbox" bind:group={listaCheck} value="C" />
-        C
-        <input type="checkbox" bind:group={listaCheck} value="D" />
-        D
       </FormGroup>
       <Button
         color="primary"
