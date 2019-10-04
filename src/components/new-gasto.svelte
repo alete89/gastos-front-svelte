@@ -4,6 +4,7 @@
   import {
     fetchMonedas,
     fetchTarjetas,
+    fetchTags,
     crearGasto
   } from "../services/appService.js";
 
@@ -22,12 +23,13 @@
     fecha_primer_resumen: undefined,
     paga_iva: undefined,
     monto_iva: undefined,
-    tags: undefined,
+    tags: [],
     tarjeta: undefined,
     comentario: undefined
   };
   let monedas = [];
   let tarjetas = [];
+  let tags = [];
   let somevalue = "";
 
   onMount(doOnMount);
@@ -47,8 +49,7 @@
   async function doOnMount() {
     monedas = await fetchMonedas();
     tarjetas = await fetchTarjetas();
-    await firstSelectionWorkaround();
-    console.log(gasto);
+    tags = await fetchTags();
   }
 
   async function firstSelectionWorkaround() {
@@ -63,6 +64,8 @@
   async function handleTest() {
     console.log("gasto: ", gasto);
   }
+
+  $: caca = console.log(gasto);
 </script>
 
 <style>
@@ -161,8 +164,20 @@
         </select>
       </FormGroup>
       <FormGroup>
-        <Label for="exampleText">Text Area</Label>
-        <Input type="textarea" name="text" id="exampleText" />
+        <Label for="tags">Tags</Label>
+        <select id="tags" bind:value={gasto.tags} multiple>
+          {#each tags as tag}
+            <option value={tag.id}>{tag.nombre}</option>
+          {/each}
+        </select>
+      </FormGroup>
+      <FormGroup>
+        <Label for="exampleText">Comentario</Label>
+        <Input
+          bind:value={gasto.comentario}
+          type="textarea"
+          name="text"
+          id="comentarioInput" />
       </FormGroup>
       <Button
         color="primary"
