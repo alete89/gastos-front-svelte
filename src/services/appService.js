@@ -7,8 +7,13 @@ export async function fetchMonedas() {
 export async function fetchTarjetas() {
   const response = await fetch('http://localhost:3000/tarjetas')
   const tarjetas = await response.json()
-  console.log(tarjetas)
   return tarjetas
+}
+
+export async function fetchTags() {
+  const response = await fetch('http://localhost:3000/tags')
+  const tags = await response.json()
+  return tags
 }
 
 export async function fetchGastos(mes, anio, tarjeta) {
