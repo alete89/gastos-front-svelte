@@ -1,5 +1,5 @@
 <script>
-  import { Table } from "sveltestrap";
+  import { Table, Badge } from "sveltestrap";
   import { onMount } from "svelte";
   import {
     Alert,
@@ -26,7 +26,7 @@
 
   onMount(async function() {
     tarjetas = await fetchTarjetas();
-    tarjeta = tarjetas[0]
+    tarjeta = tarjetas[0];
     anios = await fetchAnios(tarjeta);
     await getGastos();
   });
@@ -145,7 +145,11 @@
             <td>{new Date(gasto.fecha_primer_resumen).getMonth() + 1}</td>
             <td>{gasto.paga_iva}</td>
             <td>{gasto.monto_iva}</td>
-            <td>{gasto.tags.map(g => g.nombre)}</td>
+            <td>
+              {#each gasto.tags.map(tag => tag.nombre) as tag}
+                <Badge color="success">{tag}</Badge>
+              {/each}
+            </td>
             <td>{gasto.tarjeta.nombre}</td>
           </tr>
         {/each}
