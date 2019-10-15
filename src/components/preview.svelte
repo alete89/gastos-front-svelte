@@ -14,7 +14,16 @@
   let tarjeta
   let anios = []
   let error = ''
-  let color = 'primary'
+
+  const colors = {
+    1: 'dark',
+    2: 'primary',
+    3: 'secondary',
+    4: 'success',
+    5: 'danger',
+    6: 'warning',
+    7: 'info',
+  }
 
   onMount(async function() {
     tarjetas = await fetchTarjetas()
@@ -122,8 +131,8 @@
             <td>{gasto.paga_iva}</td>
             <td>{gasto.monto_iva}</td>
             <td>
-              {#each gasto.tags.map(tag => tag.nombre) as tag}
-                <Badge color="success">{tag}</Badge>
+              {#each gasto.tags as tag}
+                <Badge color={colors[(tag.id % Object.keys(colors).length) + 1]}>{tag.nombre}</Badge>
               {/each}
             </td>
             <td>{gasto.tarjeta.nombre}</td>
