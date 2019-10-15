@@ -1,43 +1,35 @@
 <script>
-  import { Table, Badge } from "sveltestrap";
-  import { onMount } from "svelte";
-  import {
-    Alert,
-    Form,
-    FormGroup,
-    FormText,
-    Input,
-    Label,
-    Button
-  } from "sveltestrap";
-  import { getMeses, fetchAnios } from "../services/monthService.js";
-  import { fetchTarjetas, fetchGastos } from "../services/appService.js";
+  import { Table, Badge } from 'sveltestrap'
+  import { onMount } from 'svelte'
+  import { Alert, Form, FormGroup, FormText, Input, Label, Button } from 'sveltestrap'
+  import { getMeses, fetchAnios } from '../services/monthService.js'
+  import { fetchTarjetas, fetchGastos } from '../services/appService.js'
 
-  let data = [];
-  let tarjetas = [];
-  const hoy = new Date();
-  let meses = getMeses();
-  let anio = hoy.getFullYear();
-  let mes = hoy.getMonth();
-  let tarjeta;
-  let anios = [];
-  let error = "";
-  let color = "primary";
+  let data = []
+  let tarjetas = []
+  const hoy = new Date()
+  let meses = getMeses()
+  let anio = hoy.getFullYear()
+  let mes = hoy.getMonth()
+  let tarjeta
+  let anios = []
+  let error = ''
+  let color = 'primary'
 
   onMount(async function() {
-    tarjetas = await fetchTarjetas();
-    tarjeta = tarjetas[0];
-    anios = await fetchAnios(tarjeta);
-    await getGastos();
-  });
+    tarjetas = await fetchTarjetas()
+    tarjeta = tarjetas[0]
+    anios = await fetchAnios(tarjeta)
+    await getGastos()
+  })
 
   async function getGastos() {
-    data = await fetchGastos(mes, anio, tarjeta);
+    data = await fetchGastos(mes, anio, tarjeta)
   }
 
   function formatDate(ISOString) {
-    fecha = new Date(ISOString).toISOString().slice(0, 10);
-    return fecha;
+    fecha = new Date(ISOString).toISOString().slice(0, 10)
+    return fecha
   }
 </script>
 
@@ -58,26 +50,18 @@
 </style>
 
 <head>
-  <link
-    rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
 </head>
 
 <!-- Alerta para errores -->
-<Alert color="danger" isOpen={error} toggle={() => (error = false)}>
-  {error}
-</Alert>
+<Alert color="danger" isOpen={error} toggle={() => (error = false)}>{error}</Alert>
 
 <div class="centrado">
   <section class="selectores">
     <FormGroup>
       <div class="selector">
         <Label for="tarjetaSelect" />
-        <select
-          on:change={getGastos}
-          bind:value={tarjeta}
-          name="tarjeta"
-          id="tarjetaSelect">
+        <select on:change={getGastos} bind:value={tarjeta} name="tarjeta" id="tarjetaSelect">
           {#each tarjetas as tarjeta}
             <option value={tarjeta}>{tarjeta.nombre}</option>
           {/each}
@@ -87,11 +71,7 @@
     <div class="selector">
       <FormGroup>
         <Label for="anioSelect" />
-        <select
-          on:change={getGastos}
-          bind:value={anio}
-          name="anio"
-          id="anioSelect">
+        <select on:change={getGastos} bind:value={anio} name="anio" id="anioSelect">
           {#each anios as anio}
             <option value={anio}>{anio}</option>
           {/each}
@@ -101,11 +81,7 @@
     <FormGroup>
       <div class="selector">
         <Label for="mesSelect" />
-        <select
-          on:change={getGastos}
-          bind:value={mes}
-          name="mes"
-          id="mesSelect">
+        <select on:change={getGastos} bind:value={mes} name="mes" id="mesSelect">
           {#each meses as mes}
             <option value={mes.valor}>{mes.descripcion}</option>
           {/each}
