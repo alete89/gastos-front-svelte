@@ -16,6 +16,16 @@ export async function fetchTags() {
   return tags
 }
 
+export async function crearTag(tag) {
+  const response = await fetch('http://localhost:3000/tags/new', {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    method: 'post',
+    body: JSON.stringify({ nombre: tag }),
+  })
+}
+
 export async function fetchGastos(mes, anio, tarjeta) {
   let json = {}
   json.mes = mes

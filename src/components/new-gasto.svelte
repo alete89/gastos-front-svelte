@@ -1,7 +1,7 @@
 <script>
   import { Button, Form, FormGroup, FormText, Input, Label } from 'sveltestrap'
   import { onMount } from 'svelte'
-  import { fetchMonedas, fetchTarjetas, fetchTags, crearGasto } from '../services/appService.js'
+  import { fetchMonedas, fetchTarjetas, fetchTags, crearGasto, crearTag } from '../services/appService.js'
 
   let grupo = ''
   let listaCheck = []
@@ -26,6 +26,7 @@
   let tarjetas = []
   let tags = []
   let somevalue = ''
+  let newTag = ''
 
   onMount(doOnMount)
 
@@ -56,6 +57,12 @@
 
   async function handleTest() {
     console.log('gasto: ', gasto)
+  }
+
+  async function nuevoTag() {
+    await crearTag(newTag)
+    tags = await fetchTags()
+    newTag = ''
   }
 
   $: caca = console.log(gasto)
@@ -92,7 +99,6 @@
 <div class="card tarjeta">
   <div class="card-header titulo">Agregar gasto</div>
   <div class="margen">
-    <Form>
       <FormGroup>
         <Label for="producto">Producto</Label>
         <Input type="text" name="producto" id="producto" placeholder="Producto" bind:value={gasto.producto} />
@@ -141,13 +147,15 @@
             <option value={tag.id}>{tag.nombre}</option>
           {/each}
         </select>
+      <Input type="text" name="new-tag" id="new-tag" placeholder="nombre" bind:value={newTag} />
+      <Button color="primary" disabled={!newTag} on:click={nuevoTag}>Crear tag</Button>
       </FormGroup>
+    <!-- <Label for="new-tag">Crear tag</Label> -->
       <FormGroup>
         <Label for="exampleText">Comentario</Label>
         <Input bind:value={gasto.comentario} type="textarea" name="text" id="comentarioInput" />
       </FormGroup>
       <Button color="primary" disabled={!gasto.producto} on:click={handleSubmit}>Crear Gasto</Button>
       <Button color="success" on:click={handleTest}>TEST</Button>
-    </Form>
   </div>
 </div>
