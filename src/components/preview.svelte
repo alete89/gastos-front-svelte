@@ -28,12 +28,13 @@
   onMount(async function() {
     tarjetas = await fetchTarjetas()
     tarjeta = tarjetas[0]
-    anios = await fetchAnios(tarjeta)
+    // anios = await fetchAnios(tarjeta)
     await getGastos()
   })
 
   async function getGastos() {
     data = await fetchGastos(mes, anio, tarjeta)
+    anios = await fetchAnios(tarjeta)
   }
 
   function formatDate(ISOString) {
