@@ -2,7 +2,7 @@
   import { Table, Badge } from 'sveltestrap'
   import { onMount } from 'svelte'
   import { Alert, Form, FormGroup, FormText, Input, Label, Button } from 'sveltestrap'
-  import { getMeses, fetchAnios } from '../services/monthService.js'
+  import { getMeses, fetchAnios, monthDiff } from '../services/monthService.js'
   import { fetchTarjetas, fetchGastos } from '../services/appService.js'
 
   let data = []
@@ -112,6 +112,7 @@
           <th>Cuotas</th>
           <th>Fecha</th>
           <th>First Month</th>
+          <th>Nº de cuota</th>
           <th>Paga IVA?</th>
           <th>Monto IVA</th>
           <th>Tags</th>
@@ -129,6 +130,7 @@
             <td>{gasto.cuotas}</td>
             <td>{new Date(gasto.fecha).toISOString().slice(0, 10)}</td>
             <td>{new Date(gasto.fecha_primer_resumen).getMonth() + 1}</td>
+            <td>{monthDiff(new Date(gasto.fecha_primer_resumen), new Date(anio, mes, 1)) + 1}/{gasto.cuotas}</td>
             <td>{gasto.paga_iva}</td>
             <td>{gasto.monto_iva}</td>
             <td>
