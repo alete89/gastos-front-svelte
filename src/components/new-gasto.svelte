@@ -41,10 +41,6 @@
     gasto = new Gasto()
   }
 
-  async function handleTest() {
-    console.log('gasto: ', gasto)
-  }
-
   async function nuevoTag() {
     await crearTag(newTag)
     tags = await fetchTags()
@@ -142,6 +138,5 @@
       <Input bind:value={gasto.comentario} type="textarea" name="text" id="comentarioInput" />
     </FormGroup>
     <Button color="primary" disabled={!gasto.producto} on:click={handleSubmit}>Crear Gasto</Button>
-    <Button color="success" on:click={handleTest}>TEST</Button>
   </div>
 </div>
