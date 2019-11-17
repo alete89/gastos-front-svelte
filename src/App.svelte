@@ -7,7 +7,6 @@
 <nav>
   <Link href="/">Home</Link>
   <Link href="/gasto">Nuevo</Link>
-  <Link href="/dos">dos</Link>
 </nav>
 
 <Router>
