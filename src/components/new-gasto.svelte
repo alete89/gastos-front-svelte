@@ -1,15 +1,10 @@
 <script>
-  import { Button, Form, FormGroup, FormText, Input, Label } from "sveltestrap";
-  import { onMount } from "svelte";
-  import {
-    fetchMonedas,
-    fetchTarjetas,
-    fetchTags,
-    crearGasto
-  } from "../services/appService.js";
+  import { Button, Form, FormGroup, FormText, Input, Label } from 'sveltestrap'
+  import { onMount } from 'svelte'
+  import { fetchMonedas, fetchTarjetas, fetchTags, crearGasto } from '../services/appService.js'
 
-  let grupo = "";
-  let listaCheck = [];
+  let grupo = ''
+  let listaCheck = []
   let gasto = {
     producto: undefined,
     comercio: undefined,
@@ -25,47 +20,45 @@
     monto_iva: undefined,
     tags: [],
     tarjeta: undefined,
-    comentario: undefined
-  };
-  let monedas = [];
-  let tarjetas = [];
-  let tags = [];
-  let somevalue = "";
+    comentario: undefined,
+  }
+  let monedas = []
+  let tarjetas = []
+  let tags = []
+  let somevalue = ''
 
-  onMount(doOnMount);
+  onMount(doOnMount)
 
   function fechaDeHoyFormateada() {
-    const hoy = new Date();
-    return `${hoy.getFullYear()}-${agregarCero(
-      hoy.getMonth() + 1
-    )}-${agregarCero(hoy.getDate())}`;
+    const hoy = new Date()
+    return `${hoy.getFullYear()}-${agregarCero(hoy.getMonth() + 1)}-${agregarCero(hoy.getDate())}`
   }
 
   function agregarCero(dia) {
-    if (dia < 10) return `0${dia}`;
-    else return dia;
+    if (dia < 10) return `0${dia}`
+    else return dia
   }
 
   async function doOnMount() {
-    monedas = await fetchMonedas();
-    tarjetas = await fetchTarjetas();
-    tags = await fetchTags();
+    monedas = await fetchMonedas()
+    tarjetas = await fetchTarjetas()
+    tags = await fetchTags()
   }
 
   async function firstSelectionWorkaround() {
-    gasto.moneda = monedas[0].id;
-    gasto.tarjeta = tarjetas[0].id;
+    gasto.moneda = monedas[0].id
+    gasto.tarjeta = tarjetas[0].id
   }
 
   async function handleSubmit() {
-    crearGasto(gasto);
+    crearGasto(gasto)
   }
 
   async function handleTest() {
-    console.log("gasto: ", gasto);
+    console.log('gasto: ', gasto)
   }
 
-  $: caca = console.log(gasto);
+  $: caca = console.log(gasto)
 </script>
 
 <style>
@@ -93,9 +86,7 @@
 </style>
 
 <head>
-  <link
-    rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
 </head>
 
 <div class="card tarjeta">
@@ -104,21 +95,11 @@
     <Form>
       <FormGroup>
         <Label for="producto">Producto</Label>
-        <Input
-          type="text"
-          name="producto"
-          id="producto"
-          placeholder="Producto"
-          bind:value={gasto.producto} />
+        <Input type="text" name="producto" id="producto" placeholder="Producto" bind:value={gasto.producto} />
       </FormGroup>
       <FormGroup>
         <Label for="comercio">Comercio</Label>
-        <Input
-          type="text"
-          name="comercio"
-          id="comercio"
-          placeholder="Comercio"
-          bind:value={gasto.comercio} />
+        <Input type="text" name="comercio" id="comercio" placeholder="Comercio" bind:value={gasto.comercio} />
       </FormGroup>
       <FormGroup>
         <Label for="monto_total">Monto total</Label>
@@ -131,12 +112,7 @@
       </FormGroup>
       <FormGroup>
         <Label for="cuotas">Cuotas</Label>
-        <Input
-          type="number"
-          name="cuotas"
-          id="cuotas"
-          placeholder="Cuotas"
-          bind:value={gasto.cuotas} />
+        <Input type="number" name="cuotas" id="cuotas" placeholder="Cuotas" bind:value={gasto.cuotas} />
       </FormGroup>
       <FormGroup>
         <Label for="moneda">Moneda</Label>
@@ -148,12 +124,7 @@
       </FormGroup>
       <FormGroup>
         <Label for="exampleDate">Date</Label>
-        <Input
-          type="date"
-          name="date"
-          id="exampleDate"
-          placeholder="date placeholder"
-          bind:value={gasto.fecha} />
+        <Input type="date" name="date" id="exampleDate" placeholder="date placeholder" bind:value={gasto.fecha} />
       </FormGroup>
       <FormGroup>
         <Label for="tarjeta">Tarjeta</Label>
@@ -173,18 +144,9 @@
       </FormGroup>
       <FormGroup>
         <Label for="exampleText">Comentario</Label>
-        <Input
-          bind:value={gasto.comentario}
-          type="textarea"
-          name="text"
-          id="comentarioInput" />
+        <Input bind:value={gasto.comentario} type="textarea" name="text" id="comentarioInput" />
       </FormGroup>
-      <Button
-        color="primary"
-        disabled={!gasto.producto}
-        on:click={handleSubmit}>
-        Crear Gasto
-      </Button>
+      <Button color="primary" disabled={!gasto.producto} on:click={handleSubmit}>Crear Gasto</Button>
       <Button color="success" on:click={handleTest}>TEST</Button>
     </Form>
   </div>
