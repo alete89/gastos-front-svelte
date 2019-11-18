@@ -8,7 +8,6 @@
 
   onMount(async function() {
     reportesTarjeta = await getTotales()
-    console.log(reportesTarjeta)
   })
 
   function currentMonth() {
@@ -50,7 +49,7 @@
           <tr>
             {#each reporte.totales as total, index}
               <td>
-                <strong>${total}</strong>
+                <strong>${parseFloat(Math.round(total * 100) / 100).toFixed(2)}</strong>
               </td>
             {/each}
           </tr>
