@@ -60,3 +60,9 @@ export async function crearGasto(gasto) {
     body: JSON.stringify(gasto),
   })
 }
+
+export async function getTotales() {
+  const response = await fetch('http://localhost:3000/summary')
+  const totales = await response.json()
+  return totales
+}
