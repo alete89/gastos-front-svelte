@@ -64,7 +64,7 @@
           <td>Totales</td>
           {#each subtotales as subtotal}
             <td>
-              <strong>{subtotal}</strong>
+              <strong>{parseFloat(Math.round(subtotal * 100) / 100).toFixed(2)}</strong>
             </td>
           {/each}
         </tr>
