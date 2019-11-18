@@ -29,9 +29,10 @@
     monedas = await fetchMonedas()
     tarjetas = await fetchTarjetas()
     tags = await fetchTags()
+    firstSelectionWorkaround()
   }
 
-  async function firstSelectionWorkaround() {
+  function firstSelectionWorkaround() {
     gasto.moneda = monedas[0].id
     gasto.tarjeta = tarjetas[0].id
   }
@@ -39,6 +40,8 @@
   async function handleSubmit() {
     crearGasto(gasto)
     gasto = new Gasto()
+    newTag = ''
+    firstSelectionWorkaround()
   }
 
   async function nuevoTag() {
@@ -47,7 +50,7 @@
     newTag = ''
   }
 
-  $: caca = console.log(gasto)
+  // $: caca = console.log(gasto)
 </script>
 
 <style>
@@ -75,7 +78,6 @@
 </style>
 
 <head>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
 </head>
 
 <div class="card tarjeta">
