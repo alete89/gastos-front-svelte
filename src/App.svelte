@@ -3,13 +3,25 @@
   import NewGasto from './components/new-gasto.svelte'
   import Summary from './components/summary.svelte'
   import { Router, Route, Link } from 'svero'
+  import { Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'sveltestrap'
 </script>
 
-<nav>
-  <Link href="/summary">Summary</Link>
-  <Link href="/">Home</Link>
-  <Link href="/gasto">Nuevo</Link>
-</nav>
+<head>
+  <style>
+    a {
+      color: white;
+    }
+  </style>
+</head>
+
+<Navbar color="dark" class="mb-2 sasa">
+  <NavbarBrand href="/">Gastos</NavbarBrand>
+  <Nav class="sasa">
+    <NavLink href="/">Home</NavLink>
+    <NavLink href="/summary">Summary</NavLink>
+    <NavLink href="/gasto">Nuevo</NavLink>
+  </Nav>
+</Navbar>
 
 <Router>
   <Route exact path="/" component={Preview} />
