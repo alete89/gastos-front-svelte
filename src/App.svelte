@@ -9,14 +9,14 @@
 <head>
   <style>
     a {
-      color: white;
+      color: white !important;
     }
   </style>
 </head>
 
 <Navbar color="dark" class="mb-2 sasa">
   <NavbarBrand href="/">Gastos</NavbarBrand>
-  <Nav class="sasa">
+  <Nav>
     <NavLink href="/">Home</NavLink>
     <NavLink href="/summary">Summary</NavLink>
     <NavLink href="/gasto">Nuevo</NavLink>
