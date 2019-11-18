@@ -13,10 +13,6 @@
     tarjetas = reportesTarjeta.tarjetas
     subtotales = reportesTarjeta.subtotales
   })
-
-  function currentMonth() {
-    return new Date().getMonth()
-  }
 </script>
 
 <style>

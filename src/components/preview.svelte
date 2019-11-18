@@ -37,10 +37,6 @@
     anios = await fetchAnios(tarjeta)
   }
 
-  function formatDate(ISOString) {
-    fecha = new Date(ISOString).toISOString().slice(0, 10)
-    return fecha
-  }
 </script>
 
 <style>
