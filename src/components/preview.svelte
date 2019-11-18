@@ -59,9 +59,7 @@
   }
 </style>
 
-<head>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-</head>
+<head />
 
 <!-- Alerta para errores -->
 <Alert color="danger" isOpen={error} toggle={() => (error = false)}>{error}</Alert>
