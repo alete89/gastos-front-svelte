@@ -54,17 +54,17 @@
           <tr>
             <td>{reporte.tarjeta}</td>
             {#each reporte.totales as total, index}
-              <td>
-                <strong>${parseFloat(Math.round(total * 100) / 100).toFixed(2)}</strong>
-              </td>
+              <td>${parseFloat(Math.round(total * 100) / 100).toFixed(2)}</td>
             {/each}
           </tr>
         {/each}
         <tr>
-          <td>Totales</td>
+          <td>
+            <strong>Totales</strong>
+          </td>
           {#each subtotales as subtotal}
             <td>
-              <strong>{parseFloat(Math.round(subtotal * 100) / 100).toFixed(2)}</strong>
+              <strong>${parseFloat(Math.round(subtotal * 100) / 100).toFixed(2)}</strong>
             </td>
           {/each}
         </tr>
