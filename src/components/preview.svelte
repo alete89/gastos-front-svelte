@@ -2,7 +2,7 @@
   import { Table, Badge } from 'sveltestrap'
   import { onMount } from 'svelte'
   import { Alert, Form, FormGroup, FormText, Input, Label, Button } from 'sveltestrap'
-  import { getMeses, fetchAnios, monthDiff } from '../services/monthService.js'
+  import { getMeses, fetchAnios, monthDiff } from '../services/dateService.js'
   import { fetchTarjetas, fetchGastos } from '../services/appService.js'
 
   let data = []

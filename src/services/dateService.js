@@ -35,3 +35,13 @@ export function monthDiff(d1, d2) {
   months += d2.getMonth()
   return months <= 0 ? 0 : months
 }
+
+export function fechaDeHoyFormateada() {
+  const hoy = new Date()
+  return `${hoy.getFullYear()}-${agregarCero(hoy.getMonth() + 1)}-${agregarCero(hoy.getDate())}`
+}
+
+export function agregarCero(dia) {
+  if (dia < 10) return `0${dia}`
+  else return dia
+}

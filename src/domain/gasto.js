@@ -1,3 +1,7 @@
+
+import { fechaDeHoyFormateada } from '../services/dateService'
+
+
 export default class Gasto {
   constructor() {
     this.producto = ''
@@ -5,7 +9,7 @@ export default class Gasto {
     this.monto_total = ''
     this.moneda
     this.cuotas
-    this.fecha = this.fechaDeHoyFormateada()
+    this.fecha = fechaDeHoyFormateada()
     this.anio
     this.mes
     this.dia
@@ -17,13 +21,8 @@ export default class Gasto {
     this.comentario = ''
   }
 
-fechaDeHoyFormateada() {
-    const hoy = new Date()
-    return `${hoy.getFullYear()}-${this.agregarCero(hoy.getMonth() + 1)}-${this.agregarCero(hoy.getDate())}`
+  esValido() {
+    return this.producto && this.comercio && this.monto_total && this.cuotas && this.moneda && this.fecha && this.tarjeta
   }
 
-agregarCero(dia) {
-    if (dia < 10) return `0${dia}`
-    else return dia
-  }
 }

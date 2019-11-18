@@ -1,7 +1,7 @@
 <script>
   import { Table } from 'sveltestrap'
   import { fetchTarjetas, fetchGastos, getTotales } from '../services/appService.js'
-  import { fetchAnios } from '../services/monthService'
+  import { fetchAnios } from '../services/dateService'
   import { onMount } from 'svelte'
 
   let reportesTarjeta = []
