@@ -190,6 +190,6 @@
 </div>
 
 <Toast success style="position: absolute; top: 1rem; right: 1rem;" {isOpen}>
-  <ToastHeader {toggle}>Ok</ToastHeader>
+  <ToastHeader>Ok</ToastHeader>
   <ToastBody>Gasto creado con éxito!</ToastBody>
 </Toast>
