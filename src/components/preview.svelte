@@ -14,6 +14,8 @@
   let tarjeta
   let anios = []
   let error = ''
+  let filterText = ''
+  let dataFromServer = []
 
   const colors = {
     1: 'dark',
@@ -33,10 +35,19 @@
   })
 
   async function getGastos() {
-    data = await fetchGastos(mes, anio, tarjeta)
+    dataFromServer = await fetchGastos(mes, anio, tarjeta)
+    data = [...dataFromServer]
     anios = await fetchAnios(tarjeta)
   }
 
+  function filtrarGastos() {
+    data = [...dataFromServer]
+    if (filterText !== '') {
+      data = data.filter(gasto => gasto.tags && gasto.tags.some(tag => tag.nombre.includes(filterText)))
+    }
+  }
+
+  $: filterByTag = filtrarGastos(filterText)
 </script>
 
 <style>
@@ -50,7 +61,7 @@
     display: flex;
     flex-direction: row;
   }
-  .selector {
+  .input {
     margin: 1rem;
   }
 </style>
@@ -63,7 +74,7 @@
 <div class="centrado">
   <section class="selectores">
     <FormGroup>
-      <div class="selector">
+      <div class="input">
         <Label for="tarjetaSelect" />
         <select on:change={getGastos} bind:value={tarjeta} name="tarjeta" id="tarjetaSelect">
           {#each tarjetas as tarjeta}
@@ -72,7 +83,7 @@
         </select>
       </div>
     </FormGroup>
-    <div class="selector">
+    <div class="input">
       <FormGroup>
         <Label for="anioSelect" />
         <select on:change={getGastos} bind:value={anio} name="anio" id="anioSelect">
@@ -83,13 +94,18 @@
       </FormGroup>
     </div>
     <FormGroup>
-      <div class="selector">
+      <div class="input">
         <Label for="mesSelect" />
         <select on:change={getGastos} bind:value={mes} name="mes" id="mesSelect">
           {#each meses as mes}
             <option value={mes.valor}>{mes.descripcion}</option>
           {/each}
         </select>
+      </div>
+    </FormGroup>
+    <FormGroup>
+      <div class="input">
+        <Input type="text" name="tagName" id="tagFilter" placeholder="Tag" bind:value={filterText} />
       </div>
     </FormGroup>
   </section>
