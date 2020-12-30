@@ -1,9 +1,11 @@
 <script>
-  import Preview from './components/preview.svelte'
+  import { Nav, Navbar, NavbarBrand, NavLink } from 'sveltestrap'
+  import { Router, Route } from 'svelte-routing'
+  import Login from './components/login.svelte'
+  import Register from './components/register.svelte'
   import NewGasto from './components/new-gasto.svelte'
+  import Preview from './components/preview.svelte'
   import Summary from './components/summary.svelte'
-  import { Router, Route, Link } from 'svero'
-  import { Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'sveltestrap'
 </script>
 
 <head>
@@ -20,16 +22,16 @@
     <NavLink href="/">Home</NavLink>
     <NavLink href="/summary">Summary</NavLink>
     <NavLink href="/gasto">Nuevo</NavLink>
+    <NavLink href="/login">Login?</NavLink>
+    <NavLink href="/register">Register?</NavLink>
   </Nav>
 </Navbar>
 
 <Router>
   <Route exact path="/" component={Preview} />
+  <Route exact path="/login" component={Login} />
+  <Route exact path="/register" component={Register} />
   <Route path="/gasto" component={NewGasto} />
   <Route path="/summary" component={Summary} />
+  <Route path="/logout" component={Summary} />
 </Router>
-
-<!-- another way to route -->
-<!-- <Route path="/gasto">
-    <NewGasto />
-  </Route> -->
