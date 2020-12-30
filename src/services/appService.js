@@ -1,23 +1,26 @@
+import { backendUrl } from '../constants'
+
 export async function fetchMonedas() {
-  const response = await fetch('http://localhost:3000/monedas')
+  const response = await fetch(`${backendUrl}/monedas`, { credentials: 'include' })
   const monedas = await response.json()
   return monedas
 }
 
 export async function fetchTarjetas() {
-  const response = await fetch('http://localhost:3000/tarjetas')
+  const response = await fetch(`${backendUrl}/tarjetas`, { credentials: 'include' })
   const tarjetas = await response.json()
   return tarjetas
 }
 
 export async function fetchTags() {
-  const response = await fetch('http://localhost:3000/tags')
+  const response = await fetch(`${backendUrl}/tags`, { credentials: 'include' })
   const tags = await response.json()
   return tags
 }
 
 export async function crearTag(tag) {
-  const response = await fetch('http://localhost:3000/tags/new', {
+  const response = await fetch(`${backendUrl}/tags/new`, {
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -31,7 +34,8 @@ export async function fetchGastos(mes, anio, tarjeta) {
   json.mes = mes
   json.anio = anio
   json.id_tarjeta = tarjeta.id
-  const response = await fetch('http://localhost:3000/gastos/mes', {
+  const response = await fetch(`${backendUrl}/gastos/mes`, {
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -52,7 +56,8 @@ export async function crearGasto(gasto) {
   gasto.anio = fecha.getFullYear()
   gasto.mes = fecha.getMonth()
   gasto.dia = fecha.getDate() + 1
-  const response = await fetch('http://localhost:3000/gasto', {
+  const response = await fetch(`${backendUrl}/gasto`, {
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -62,7 +67,7 @@ export async function crearGasto(gasto) {
 }
 
 export async function getTotales() {
-  const response = await fetch('http://localhost:3000/summary')
+  const response = await fetch(`${backendUrl}/summary`, { credentials: 'include' })
   const totales = await response.json()
   return totales
 }

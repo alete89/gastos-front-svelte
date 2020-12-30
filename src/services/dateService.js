@@ -1,5 +1,7 @@
+import { backendUrl } from '../constants'
+
 export async function fetchAnios(tarjeta) {
-  const response = await fetch(`http://localhost:3000/anios/${tarjeta.id}`)
+  const response = await fetch(`${backendUrl}/anios/${tarjeta.id}`)
   return await response.json()
 }
 
