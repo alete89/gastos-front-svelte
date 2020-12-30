@@ -76,7 +76,7 @@
     <FormGroup>
       <div class="input">
         <Label for="tarjetaSelect" />
-        <select on:change={getGastos} bind:value={tarjeta} name="tarjeta" id="tarjetaSelect">
+        <select on:blur={getGastos} bind:value={tarjeta} name="tarjeta" id="tarjetaSelect">
           {#each tarjetas as tarjeta}
             <option value={tarjeta}>{tarjeta.nombre}</option>
           {/each}
@@ -86,7 +86,7 @@
     <div class="input">
       <FormGroup>
         <Label for="anioSelect" />
-        <select on:change={getGastos} bind:value={anio} name="anio" id="anioSelect">
+        <select on:blur={getGastos} bind:value={anio} name="anio" id="anioSelect">
           {#each anios as anio}
             <option value={anio}>{anio}</option>
           {/each}
@@ -96,7 +96,7 @@
     <FormGroup>
       <div class="input">
         <Label for="mesSelect" />
-        <select on:change={getGastos} bind:value={mes} name="mes" id="mesSelect">
+        <select on:blur={getGastos} bind:value={mes} name="mes" id="mesSelect">
           {#each meses as mes}
             <option value={mes.valor}>{mes.descripcion}</option>
           {/each}
