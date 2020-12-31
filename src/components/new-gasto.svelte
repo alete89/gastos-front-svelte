@@ -1,16 +1,13 @@
 <script>
-  import { Button, Form, FormGroup, FormText, Input, Label, Toast, ToastBody, ToastHeader } from 'sveltestrap'
   import { onMount } from 'svelte'
-  import { fetchMonedas, fetchTarjetas, fetchTags, crearGasto, crearTag } from '../services/appService.js'
+  import { Button, FormGroup, Input, Label, Toast, ToastBody, ToastHeader } from 'sveltestrap'
   import Gasto from '../domain/gasto'
+  import { crearGasto, crearTag, fetchMonedas, fetchTags, fetchTarjetas } from '../services/appService.js'
 
-  let grupo = ''
-  let listaCheck = []
   let gasto = new Gasto()
   let monedas = []
   let tarjetas = []
   let tags = []
-  let somevalue = ''
   let newTag = ''
   let isOpen = false
   let disabled = true
