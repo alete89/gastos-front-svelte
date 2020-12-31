@@ -66,6 +66,17 @@ export async function crearGasto(gasto) {
   })
 }
 
+export async function crearTarjeta(tarjeta) {
+  const response = await fetch(`${backendUrl}/tarjeta`, {
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    method: 'post',
+    body: JSON.stringify(tarjeta),
+  })
+}
+
 export async function getTotales() {
   const response = await fetch(`${backendUrl}/summary`, { credentials: 'include' })
   const totales = await response.json()

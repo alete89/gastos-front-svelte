@@ -6,6 +6,7 @@
   import Preview from './components/preview.svelte'
   import Register from './components/register.svelte'
   import Summary from './components/summary.svelte'
+  import NewTarjeta from './components/new-tarjeta.svelte'
 </script>
 
 <Router>
@@ -19,5 +20,8 @@
   </PrivateRoute>
   <PrivateRoute path="/summary" let:location>
     <Summary />
+  </PrivateRoute>
+  <PrivateRoute path="/tarjetas" let:location>
+    <NewTarjeta />
   </PrivateRoute>
 </Router>

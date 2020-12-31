@@ -31,6 +31,7 @@
       {/if}
       {#if $accessToken}
         <Link on:click={handleLogout} to="/">Logout</Link>
+        <Link to="/tarjetas">Tarjetas</Link>
       {/if}
     </Router>
   </Nav>
