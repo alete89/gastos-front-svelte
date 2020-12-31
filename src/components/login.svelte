@@ -1,15 +1,18 @@
 <script>
   import { Button, FormGroup, Input, Label } from 'sveltestrap'
-  import { navigate } from 'svelte-routing'
+  import { useNavigate, useLocation } from "svelte-navigator";
   import { login } from '../services/auth'
 
   let email = ''
   let password = ''
+  const navigate = useNavigate();
+  const location = useLocation();
 
   async function handleLogin() {
     try {
       await login({ email, password })
-      navigate('/')
+      const from = ($location.state && $location.state.from) || "/";
+      navigate(from, { replace: true });
     } catch (error) {
       console.log(error)
     }

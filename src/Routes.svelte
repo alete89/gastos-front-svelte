@@ -12,7 +12,9 @@
   <Route exact path="/" component={Preview} />
   <Route exact path="/login" component={Login} />
   <Route exact path="/register" component={Register} />
-  <PrivateRoute path="/gasto" component={NewGasto} let:location />
+  <PrivateRoute path="/gasto" let:location>
+    <NewGasto />
+  </PrivateRoute>
   <Route path="/summary" component={Summary} />
   <Route path="/logout" component={Summary} />
 </Router>
