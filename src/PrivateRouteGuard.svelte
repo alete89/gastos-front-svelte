@@ -5,7 +5,6 @@
   const navigate = useNavigate()
   const location = useLocation()
 
-  $: console.log(`access token en guard: ${$accessToken}`)
   $: if (!$accessToken) {
     navigate('/login', {
       state: { from: $location.pathname },

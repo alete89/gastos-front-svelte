@@ -3,7 +3,6 @@
   import Nav from './components/nav.svelte'
   import { accessToken } from './accessToken'
 
-  $: console.log(`access token en app: ${$accessToken}`)
 </script>
 
 <Nav />
