@@ -34,6 +34,11 @@ export const login = async ({ email, password }) => {
     },
     body: JSON.stringify({ email, password }),
   })
+
+  if(!response.ok) {
+    throw "Login incorrecto"
+  }
+  
   accessToken.update(async (current) => {
     return await response.json()
   })
