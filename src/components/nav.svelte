@@ -1,5 +1,11 @@
 <script>
-  import { Nav, Navbar, NavbarBrand, NavLink } from 'sveltestrap'
+  import { Link, Router } from 'svelte-navigator'
+  import { Nav, Navbar, NavbarBrand } from 'sveltestrap'
+  import { logout } from '../services/auth'
+
+  const handleLogout = async () => {
+    await logout()
+  }
 </script>
 
 <head>
@@ -11,12 +17,15 @@
 </head>
 
 <Navbar color="dark" class="mb-2 sasa">
-  <NavbarBrand href="/">Gastos</NavbarBrand>
+  <NavbarBrand to="/">Gastos</NavbarBrand>
   <Nav>
-    <NavLink href="/">Home</NavLink>
-    <NavLink href="/summary">Summary</NavLink>
-    <NavLink href="/gasto">Nuevo</NavLink>
-    <NavLink href="/login">Login?</NavLink>
-    <NavLink href="/register">Register?</NavLink>
+    <Router>
+      <Link to="/">Home</Link>
+      <Link to="/summary">Summary</Link>
+      <Link to="/gasto">Nuevo</Link>
+      <Link to="/login">Login?</Link>
+      <Link to="/register">Register?</Link>
+      <Link on:click={handleLogout} to="/">Logout</Link>
+    </Router>
   </Nav>
 </Navbar>

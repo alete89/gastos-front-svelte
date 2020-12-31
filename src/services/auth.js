@@ -62,9 +62,16 @@ export const refreshToken = async () => {
     credentials: 'include',
   })
   const { accessToken: newAccessToken } = await response.json()
-  // console.log(`refreshed: ${accessToken}`)
   accessToken.update(async (current) => {
     return newAccessToken
   })
-  // setAccessToken(accessToken)
 }
+
+export const logout = async () => {
+  const response = await fetch(`${backendUrl}/logout`, {
+    method: 'POST',
+    credentials: 'include',
+  })
+  accessToken.update((current) => null)
+}
+
