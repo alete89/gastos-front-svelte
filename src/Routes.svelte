@@ -1,5 +1,6 @@
 <script>
-  import { Route, Router } from 'svelte-routing'
+  import { Route, Router } from 'svelte-navigator'
+  import PrivateRoute from './PrivateRoute.svelte'
   import Login from './components/login.svelte'
   import NewGasto from './components/new-gasto.svelte'
   import Preview from './components/preview.svelte'
@@ -11,7 +12,7 @@
   <Route exact path="/" component={Preview} />
   <Route exact path="/login" component={Login} />
   <Route exact path="/register" component={Register} />
-  <Route path="/gasto" component={NewGasto} />
+  <PrivateRoute path="/gasto" component={NewGasto} let:location />
   <Route path="/summary" component={Summary} />
   <Route path="/logout" component={Summary} />
 </Router>

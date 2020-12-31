@@ -1,9 +1,11 @@
-let accessToken = ''
+import { writable } from 'svelte/store'
 
-export const setAccessToken = (newToken) => {
-  accessToken = newToken
-}
+export const accessToken = writable(null)
 
-export const getAccessToken = () => {
-  return accessToken
-}
+// export const setAccessToken = (newToken) => {
+//   accessToken = newToken
+// }
+
+// export const getAccessToken = () => {
+//   return accessToken
+// }
