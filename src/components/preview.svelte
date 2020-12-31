@@ -27,7 +27,7 @@
     7: 'info',
   }
 
-  onMount(async function() {
+  onMount(async function () {
     tarjetas = await fetchTarjetas()
     tarjeta = tarjetas[0]
     // anios = await fetchAnios(tarjeta)
@@ -43,7 +43,7 @@
   function filtrarGastos() {
     data = [...dataFromServer]
     if (filterText !== '') {
-      data = data.filter(gasto => gasto.tags && gasto.tags.some(tag => tag.nombre.includes(filterText)))
+      data = data.filter((gasto) => gasto.tags && gasto.tags.some((tag) => tag.nombre.includes(filterText)))
     }
   }
 
@@ -140,7 +140,7 @@
             <td>{gasto.cuotas}</td>
             <td>{new Date(gasto.fecha).toISOString().slice(0, 10)}</td>
             <td>{new Date(gasto.fecha_primer_resumen).getMonth() + 1}</td>
-            <td>{monthDiff(new Date(gasto.fecha_primer_resumen), new Date(anio, mes, 1)) + 1}/{gasto.cuotas}</td>
+            <td>{monthDiff(new Date(gasto.fecha_primer_resumen), new Date(anio, mes, 1))}/{gasto.cuotas}</td>
             <td>{gasto.paga_iva}</td>
             <td>{gasto.monto_iva}</td>
             <td>

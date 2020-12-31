@@ -47,7 +47,7 @@
       <div class="col">
         <FormGroup>
           <Label for="password">Password</Label>
-          <Input type="text" name="password" id="password" placeholder="password" bind:value={password} />
+          <Input type="password" name="password" id="password" placeholder="password" bind:value={password} />
         </FormGroup>
       </div>
     </div>
