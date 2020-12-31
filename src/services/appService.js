@@ -7,6 +7,7 @@ export async function fetchMonedas() {
 }
 
 export async function fetchTarjetas() {
+  // console.log("pide tarjetas desde front")
   const response = await fetch(`${backendUrl}/tarjetas`, { credentials: 'include' })
   const tarjetas = await response.json()
   return tarjetas

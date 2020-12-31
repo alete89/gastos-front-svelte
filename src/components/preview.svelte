@@ -35,9 +35,12 @@
   })
 
   async function getGastos() {
+    const set = new Set([anio, await fetchAnios(tarjeta)])
+    anios = [...set]
+    anio = anios[0]
     dataFromServer = await fetchGastos(mes, anio, tarjeta)
     data = [...dataFromServer]
-    anios = await fetchAnios(tarjeta)
+    console.log("anios", anios)
   }
 
   function filtrarGastos() {
@@ -45,6 +48,12 @@
     if (filterText !== '') {
       data = data.filter((gasto) => gasto.tags && gasto.tags.some((tag) => tag.nombre.includes(filterText)))
     }
+  }
+
+  const numeroDeCuota = (gasto) => {
+    const nroCuota = monthDiff(new Date(gasto.fecha_primer_resumen), new Date(anio, mes, 1)) + 1
+    console.log(nroCuota)
+    return nroCuota
   }
 
   $: filterByTag = filtrarGastos(filterText)
@@ -140,7 +149,7 @@
             <td>{gasto.cuotas}</td>
             <td>{new Date(gasto.fecha).toISOString().slice(0, 10)}</td>
             <td>{new Date(gasto.fecha_primer_resumen).getMonth() + 1}</td>
-            <td>{monthDiff(new Date(gasto.fecha_primer_resumen), new Date(anio, mes, 1))}/{gasto.cuotas}</td>
+            <td>{numeroDeCuota(gasto)}/{gasto.cuotas}</td>
             <td>{gasto.paga_iva}</td>
             <td>{gasto.monto_iva}</td>
             <td>
