@@ -1,6 +1,7 @@
 <script>
   import { Link, Router } from 'svelte-navigator'
   import { Nav, Navbar, NavbarBrand } from 'sveltestrap'
+  import { accessToken } from '../accessToken'
   import { logout } from '../services/auth'
 
   const handleLogout = async () => {
@@ -12,6 +13,7 @@
   <style>
     a {
       color: white !important;
+      margin-left: 1rem;
     }
   </style>
 </head>
@@ -23,9 +25,13 @@
       <Link to="/">Home</Link>
       <Link to="/summary">Summary</Link>
       <Link to="/gasto">Nuevo</Link>
-      <Link to="/login">Login?</Link>
-      <Link to="/register">Register?</Link>
-      <Link on:click={handleLogout} to="/">Logout</Link>
+      {#if !$accessToken}
+        <Link to="/login">Login?</Link>
+        <Link to="/register">Register?</Link>
+      {/if}
+      {#if $accessToken}
+        <Link on:click={handleLogout} to="/">Logout</Link>
+      {/if}
     </Router>
   </Nav>
 </Navbar>
