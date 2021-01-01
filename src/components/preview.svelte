@@ -80,7 +80,8 @@
     <FormGroup>
       <div class="input">
         <Label for="tarjetaSelect" />
-        <select on:blur={getGastos} bind:value={tarjeta} name="tarjeta" id="tarjetaSelect">
+        <!-- svelte-ignore a11y-no-onchange -->
+        <select bind:value={tarjeta} on:change={getGastos} name="tarjeta" id="tarjetaSelect">
           {#each tarjetas as tarjeta}
             <option value={tarjeta}>{tarjeta.nombre}</option>
           {/each}
@@ -90,7 +91,8 @@
     <div class="input">
       <FormGroup>
         <Label for="anioSelect" />
-        <select on:blur={getGastos} bind:value={anio} name="anio" id="anioSelect">
+        <!-- svelte-ignore a11y-no-onchange -->
+        <select bind:value={anio} on:change={getGastos} name="anio" id="anioSelect">
           {#each anios as anio}
             <option value={anio}>{anio}</option>
           {/each}
@@ -100,7 +102,8 @@
     <FormGroup>
       <div class="input">
         <Label for="mesSelect" />
-        <select on:blur={getGastos} bind:value={mes} name="mes" id="mesSelect">
+        <!-- svelte-ignore a11y-no-onchange -->
+        <select bind:value={mes} on:change={getGastos} name="mes" id="mesSelect">
           {#each meses as mes}
             <option value={mes.valor}>{mes.descripcion}</option>
           {/each}
