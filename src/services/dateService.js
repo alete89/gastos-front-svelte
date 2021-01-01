@@ -3,7 +3,6 @@ import { backendUrl } from '../constants'
 export async function fetchAnios(tarjeta) {
   const response = await fetch(`${backendUrl}/anios/${tarjeta.id}`)
   const anios = await response.json()
-  console.log("anios", anios)
   return anios
 }
 

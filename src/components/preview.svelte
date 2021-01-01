@@ -1,9 +1,8 @@
 <script>
-  import { Table, Badge } from 'sveltestrap'
   import { onMount } from 'svelte'
-  import { Alert, Form, FormGroup, FormText, Input, Label, Button } from 'sveltestrap'
-  import { getMeses, fetchAnios, monthDiff } from '../services/dateService.js'
-  import { fetchTarjetas, fetchGastos } from '../services/appService.js'
+  import { Alert, Badge, FormGroup, Input, Label } from 'sveltestrap'
+  import { fetchGastos, fetchTarjetas } from '../services/appService.js'
+  import { fetchAnios, getMeses, monthDiff } from '../services/dateService.js'
 
   let data = []
   let tarjetas = []
@@ -31,7 +30,7 @@
     tarjetas = await fetchTarjetas()
     tarjeta = tarjetas[0]
     const aniosConGastos = await fetchAnios(tarjeta)
-    anios = [...new Set([anio].concat(aniosConGastos))]
+    anios = [...new Set(aniosConGastos.concat(anio))].sort()
     await getGastos()
   })
 
@@ -49,11 +48,10 @@
 
   const numeroDeCuota = (gasto) => {
     const nroCuota = monthDiff(new Date(gasto.fecha_primer_resumen), new Date(anio, mes, 1)) + 1
-    console.log(nroCuota)
     return nroCuota
   }
 
-  $: filterByTag = filtrarGastos(filterText)
+  $: filtrarGastos(filterText)
 </script>
 
 <style>
