@@ -30,17 +30,14 @@
   onMount(async function () {
     tarjetas = await fetchTarjetas()
     tarjeta = tarjetas[0]
-    // anios = await fetchAnios(tarjeta)
+    const aniosConGastos = await fetchAnios(tarjeta)
+    anios = [...new Set([anio].concat(aniosConGastos))]
     await getGastos()
   })
 
   async function getGastos() {
-    const set = new Set([anio, await fetchAnios(tarjeta)])
-    anios = [...set]
-    anio = anios[0]
     dataFromServer = await fetchGastos(mes, anio, tarjeta)
     data = [...dataFromServer]
-    console.log("anios", anios)
   }
 
   function filtrarGastos() {
