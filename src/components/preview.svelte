@@ -128,7 +128,7 @@
           <th>Moneda</th>
           <th>Cuotas</th>
           <th>Fecha</th>
-          <th>First Month</th>
+          <th>Primer mes</th>
           <th>Nº de cuota</th>
           <th>Paga IVA?</th>
           <th>Monto IVA</th>

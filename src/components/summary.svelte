@@ -1,14 +1,13 @@
 <script>
-  import { Table } from 'sveltestrap'
-  import { fetchTarjetas, fetchGastos, getTotales } from '../services/appService.js'
-  import { fetchAnios } from '../services/dateService'
   import { onMount } from 'svelte'
+  import { getTotales } from '../services/appService.js'
+  import { formatDecimal } from '../helpers'
 
   let reportesTarjeta = []
   let tarjetas = []
   let subtotales = []
 
-  onMount(async function() {
+  onMount(async function () {
     reportesTarjeta = await getTotales()
     tarjetas = reportesTarjeta.tarjetas
     subtotales = reportesTarjeta.subtotales
@@ -32,9 +31,7 @@
 </style>
 
 <div class="container margen">
-  <h2 class="titulo">
-    <strong>Summary</strong>
-  </h2>
+  <h2 class="titulo"><strong>Summary</strong></h2>
   <div class="table-responsive">
     <table class="table table-bordered table-hover">
       <thead class="thead-dark">
@@ -46,26 +43,21 @@
         </tr>
       </thead>
       <tbody>
-        {#each tarjetas as reporte, index}
+        {#each tarjetas as reporte}
           <tr>
             <td>{reporte.tarjeta}</td>
-            {#each reporte.totales as total, index}
-              <td>${parseFloat(Math.round(total * 100) / 100).toFixed(2)}</td>
+            {#each reporte.totales as total}
+              <td>${formatDecimal(total)}</td>
             {/each}
           </tr>
         {/each}
         <tr>
-          <td>
-            <strong>Totales</strong>
-          </td>
+          <td><strong>Totales</strong></td>
           {#each subtotales as subtotal}
-            <td>
-              <strong>${parseFloat(Math.round(subtotal * 100) / 100).toFixed(2)}</strong>
-            </td>
+            <td><strong>${formatDecimal(subtotal)}</strong></td>
           {/each}
         </tr>
       </tbody>
     </table>
   </div>
-
 </div>

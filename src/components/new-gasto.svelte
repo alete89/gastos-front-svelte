@@ -10,7 +10,6 @@
   let tags = []
   let newTag = ''
   let isOpen = false
-  let disabled = true
   onMount(doOnMount)
 
   async function doOnMount() {
@@ -47,15 +46,9 @@
     newTag = ''
   }
 
-  function noPuedeCrear(gasto) {
-    disabled = !gasto.esValido()
-  }
-
   function toggle() {
     isOpen = !isOpen
   }
-
-  $: actualizarDisabled = noPuedeCrear(gasto)
 </script>
 
 <style>
@@ -123,8 +116,8 @@
     <div class="row">
       <div class="col">
         <FormGroup>
-          <Label for="exampleDate">Date</Label>
-          <Input type="date" name="date" id="exampleDate" placeholder="date placeholder" bind:value={gasto.fecha} />
+          <Label for="fecha">Fecha</Label>
+          <Input type="date" name="fecha" id="fecha" placeholder="02/01/2021" bind:value={gasto.fecha} />
         </FormGroup>
       </div>
       <div class="col">
@@ -175,13 +168,12 @@
         </div>
       </div>
     </FormGroup>
-    <!-- <Label for="new-tag">Crear tag</Label> -->
     <FormGroup>
       <Label for="exampleText">Comentario</Label>
       <Input bind:value={gasto.comentario} type="textarea" name="text" id="comentarioInput" />
     </FormGroup>
     <div style="text-align:center;">
-      <Button color="primary" {disabled} on:click={handleSubmit}>Crear Gasto</Button>
+      <Button color="primary" disabled={!gasto.esValido()} on:click={handleSubmit}>Crear Gasto</Button>
     </div>
   </div>
 </div>

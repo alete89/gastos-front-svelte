@@ -5,16 +5,9 @@
   let tarjeta = {}
   let isOpen = false
 
-  const diasDeLaSemana = [
-    { id: 1, nombre: 'lunes' },
-    { id: 2, nombre: 'martes' },
-    { id: 3, nombre: 'miercoles' },
-    { id: 4, nombre: 'jueves' },
-    { id: 5, nombre: 'viernes' },
-    { id: 6, nombre: 'sabado' },
-    { id: 7, nombre: 'domingo' },
-  ]
-  const semanaDelMes = [1, 2, 3, 4]
+  export const diasDeLaSemana = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo']
+
+  export const semanaDelMes = [1, 2, 3, 4]
 
   async function handleSubmit() {
     try {
@@ -87,8 +80,8 @@
           <Label for="diaCierre">Día</Label>
           <div>
             <select bind:value={tarjeta.diaCierre} name="diaCierre" id="diaCierre">
-              {#each diasDeLaSemana as diaCierre}
-                <option value={diaCierre.id}>{diaCierre.nombre}</option>
+              {#each diasDeLaSemana as diaCierre, index}
+                <option value={index + 1}>{diaCierre}</option>
               {/each}
             </select>
           </div>
@@ -116,8 +109,8 @@
           <Label for="diaVencimiento">Día</Label>
           <div>
             <select bind:value={tarjeta.diaVencimiento} name="diaVencimiento" id="diaVencimiento">
-              {#each diasDeLaSemana as diaVencimiento}
-                <option value={diaVencimiento.id}>{diaVencimiento.nombre}</option>
+              {#each diasDeLaSemana as diaVencimiento, index}
+                <option value={index + 1}>{diaVencimiento}</option>
               {/each}
             </select>
           </div>
