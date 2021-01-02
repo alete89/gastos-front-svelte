@@ -148,7 +148,7 @@
             <td>{new Date(gasto.fecha).toISOString().slice(0, 10)}</td>
             <td>{new Date(gasto.fecha_primer_resumen).getMonth() + 1}</td>
             <td>{numeroDeCuota(gasto)}/{gasto.cuotas}</td>
-            <td>{gasto.paga_iva}</td>
+            <td>{gasto.paga_iva ? 'si' : 'no'}</td>
             <td>{gasto.monto_iva}</td>
             <td>
               {#each gasto.tags as tag}
