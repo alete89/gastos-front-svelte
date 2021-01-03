@@ -1,6 +1,4 @@
-
-import { fechaDeHoyFormateada } from '../services/dateService'
-
+import { fechaDeHoyFormateada, monthDiff, toDate } from '../services/dateService'
 
 export default class Gasto {
   constructor() {
@@ -22,7 +20,19 @@ export default class Gasto {
   }
 
   esValido() {
-    return this.producto && this.comercio && this.monto_total && this.cuotas && this.moneda && this.fecha && this.tarjeta
+    return (
+      this.producto && this.comercio && this.monto_total && this.cuotas && this.moneda && this.fecha && this.tarjeta
+    )
   }
 
+  numeroDeCuota(anio, mes) {
+    return monthDiff(this.fecha_primer_resumen, new Date(anio, mes, 1)) + 1
+  }
+
+  static fromJSON(gastoJson) {
+    return Object.assign(new Gasto(), gastoJson, {
+      fecha: toDate(gastoJson.fecha),
+      fecha_primer_resumen: toDate(gastoJson.fecha_primer_resumen),
+    })
+  }
 }

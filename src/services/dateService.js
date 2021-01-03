@@ -39,6 +39,11 @@ export function monthDiff(d1, d2) {
   return months <= 0 ? 0 : months
 }
 
+export const toDate = (dateString) => {
+  var fecha = dateString.split(/\D/)
+  return new Date(Number(fecha[0]), Number(fecha[1]) - 1, Number(fecha[2]))
+}
+
 export function fechaDeHoyFormateada() {
   const hoy = new Date()
   return `${hoy.getFullYear()}-${agregarCero(hoy.getMonth() + 1)}-${agregarCero(hoy.getDate())}`

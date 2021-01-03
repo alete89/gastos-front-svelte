@@ -46,11 +46,6 @@
     }
   }
 
-  const numeroDeCuota = (gasto) => {
-    const nroCuota = monthDiff(new Date(gasto.fecha_primer_resumen), new Date(anio, mes, 1)) + 1
-    return nroCuota
-  }
-
   $: filtrarGastos(filterText)
 </script>
 
@@ -147,7 +142,7 @@
             <td>{gasto.cuotas}</td>
             <td>{new Date(gasto.fecha).toISOString().slice(0, 10)}</td>
             <td>{new Date(gasto.fecha_primer_resumen).getMonth() + 1}</td>
-            <td>{numeroDeCuota(gasto)}/{gasto.cuotas}</td>
+            <td>{gasto.numeroDeCuota(anio, mes)}/{gasto.cuotas}</td>
             <td>{gasto.paga_iva ? 'si' : 'no'}</td>
             <td>{gasto.monto_iva}</td>
             <td>

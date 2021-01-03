@@ -1,4 +1,5 @@
 import { backendUrl } from '../constants'
+import Gasto from '../domain/gasto'
 
 export async function fetchMonedas() {
   const response = await fetch(`${backendUrl}/monedas`, { credentials: 'include' })
@@ -46,8 +47,8 @@ export async function fetchGastos(mes, anio, tarjeta) {
 
   if (response) {
     if (response.ok) {
-      const gastos = await response.json()
-      return gastos
+      const gastosJson = await response.json()
+      return gastosJson.map((gastoJson) => Gasto.fromJSON(gastoJson))
     }
   }
 }
