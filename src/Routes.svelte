@@ -7,6 +7,7 @@
   import Register from './components/register.svelte'
   import Summary from './components/summary.svelte'
   import NewTarjeta from './components/new-tarjeta.svelte'
+import Notification from './components/notification.svelte';
 </script>
 
 <Router>
@@ -24,4 +25,5 @@
   <PrivateRoute path="/tarjetas" let:location>
     <NewTarjeta />
   </PrivateRoute>
+  <Notification />
 </Router>

@@ -1,7 +1,8 @@
 <script>
   import { onMount } from 'svelte'
-  import { Button, FormGroup, Input, Label, Toast, ToastBody, ToastHeader } from 'sveltestrap'
+  import { Button, FormGroup, Input, Label } from 'sveltestrap'
   import Gasto from '../domain/gasto'
+  import { notifier } from '../notifier'
   import { crearGasto, crearTag, fetchMonedas, fetchTags, fetchTarjetas } from '../services/appService.js'
 
   let gasto = new Gasto()
@@ -27,7 +28,9 @@
   async function handleSubmit() {
     try {
       await crearGasto(gasto)
+      notifier.success('Gasto creado con éxito', 2500)
     } catch (error) {
+      notifier.error(error)
       console.log(error)
     }
     gasto = new Gasto()
@@ -177,8 +180,3 @@
     </div>
   </div>
 </div>
-
-<Toast success style="position: absolute; top: 1rem; right: 1rem;" {isOpen}>
-  <ToastHeader>Ok</ToastHeader>
-  <ToastBody>Gasto creado con éxito!</ToastBody>
-</Toast>

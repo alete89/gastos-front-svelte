@@ -1,19 +1,22 @@
 <script>
   import { Button, FormGroup, Input, Label } from 'sveltestrap'
-  import { useNavigate, useLocation } from "svelte-navigator";
+  import { useNavigate, useLocation } from 'svelte-navigator'
   import { login } from '../services/auth'
+  import { notifier } from '../notifier'
 
   let email = ''
   let password = ''
-  const navigate = useNavigate();
-  const location = useLocation();
+  const navigate = useNavigate()
+  const location = useLocation()
 
   async function handleLogin() {
     try {
+      notifier.clear()
       await login({ email, password })
-      const from = ($location.state && $location.state.from) || "/";
-      navigate(from, { replace: true });
+      const from = ($location.state && $location.state.from) || '/'
+      navigate(from, { replace: true })
     } catch (error) {
+      notifier.error(error)
       console.log(error)
     }
   }
@@ -59,9 +62,3 @@
     </div>
   </div>
 </div>
-
-<!-- 
-<Toast success style="position: absolute; top: 1rem; right: 1rem;" {isOpen}>
-  <ToastHeader>Ok</ToastHeader>
-  <ToastBody>Gasto creado con éxito!</ToastBody>
-</Toast> -->

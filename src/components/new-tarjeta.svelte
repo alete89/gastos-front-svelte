@@ -1,9 +1,9 @@
 <script>
-  import { Button, FormGroup, Input, Label, Toast, ToastBody, ToastHeader } from 'sveltestrap'
+  import { Button, FormGroup, Input, Label } from 'sveltestrap'
+  import { notifier } from '../notifier'
   import { crearTarjeta } from '../services/appService'
 
   let tarjeta = {}
-  let isOpen = false
 
   export const diasDeLaSemana = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo']
 
@@ -13,22 +13,11 @@
     try {
       console.log('tarjeta', tarjeta)
       await crearTarjeta(tarjeta)
-      mostrarToastPor(2000)
+      notifier.success('Tarjeta creada', 2500)
     } catch (error) {
+      notifier.error(error)
       console.log(error)
     }
-  }
-
-  const mostrarToastPor = (milisegundos) => {
-    toggle()
-
-    setTimeout(() => {
-      toggle()
-    }, milisegundos)
-  }
-
-  function toggle() {
-    isOpen = !isOpen
   }
 
   // $: disabled = !tarjeta.esValido()
@@ -134,8 +123,3 @@
     </div>
   </div>
 </div>
-
-<Toast success style="position: absolute; top: 1rem; right: 1rem;" {isOpen}>
-  <ToastHeader>Ok</ToastHeader>
-  <ToastBody>Tarjeta creado con éxito!</ToastBody>
-</Toast>

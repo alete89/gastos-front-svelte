@@ -1,16 +1,12 @@
 <script>
-  import { Button, FormGroup, Input, Label, Form, Toast, ToastBody, ToastHeader } from 'sveltestrap'
+  import { navigate } from 'svelte-navigator'
+  import { Button, Form, FormGroup, Input, Label } from 'sveltestrap'
+  import { notifier } from '../notifier'
   import { register } from '../services/auth'
-  import { navigate } from 'svelte-routing'
 
   let email = ''
   let password = ''
   let passwordAgain = ''
-  let error = ''
-
-  function toggleToast() {
-    error = ''
-  }
 
   $: passwordOk = password === passwordAgain && password != ''
 
@@ -20,9 +16,10 @@
       console.log()
       e.preventDefault()
       await register({ email, password })
+      notifier.success(`Usuario ${email} registrado`, 2500)
       navigate('/login')
     } catch (err) {
-      error = err
+      notifier.error(err)
       console.log(error)
     }
   }
@@ -90,8 +87,3 @@
     </div>
   </div>
 </Form>
-
-<Toast style="position: absolute; top: 1rem; right: 1rem;" isOpen={error}>
-  <ToastHeader toggle={toggleToast}>Error</ToastHeader>
-  <ToastBody>{error}</ToastBody>
-</Toast>
