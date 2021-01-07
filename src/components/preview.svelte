@@ -2,7 +2,7 @@
   import { onMount } from 'svelte'
   import { Alert, Badge, FormGroup, Input, Label } from 'sveltestrap'
   import { fetchGastos, fetchTarjetas } from '../services/appService.js'
-  import { fetchAnios, getMeses, monthDiff } from '../services/dateService.js'
+  import { fetchAnios, getMeses } from '../services/dateService.js'
 
   let data = []
   let tarjetas = []

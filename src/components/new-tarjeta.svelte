@@ -119,7 +119,7 @@
       </div>
     </div>
     <div style="text-align:center;">
-      <Button color="primary" on:click={handleSubmit}>Crear tarjeta</Button>
+      <Button color="primary" disabled={!tarjeta.nombre} on:click={handleSubmit}>Crear tarjeta</Button>
     </div>
   </div>
 </div>
