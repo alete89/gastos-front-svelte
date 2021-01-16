@@ -3,12 +3,33 @@
   import { Button, Form, FormGroup, Input, Label } from 'sveltestrap'
   import { notifier } from '../notifier'
   import { register } from '../services/auth'
+  import Joi from 'joi'
 
   let email = ''
   let password = ''
   let passwordAgain = ''
+  let mailError = ''
+  let passwordError = ''
+
+  const schema = Joi.string().email({ tlds: { allow: false } })
 
   $: passwordOk = password === passwordAgain && password != ''
+
+  $: emailOk = !schema.validate(email).error
+
+  const showInvalidEmail = () => {
+    mailError = ''
+    if (!emailOk) {
+      mailError = 'ingrese un email válido'
+    }
+  }
+
+  const showInvalidPassword = () => {
+    passwordError = ''
+    if (!passwordOk) {
+      passwordError = 'las passwords deben coincidir'
+    }
+  }
 
   async function handleRegister(e) {
     console.log(email, password)
@@ -25,23 +46,6 @@
   }
 </script>
 
-<style>
-  .tarjeta {
-    background-color: #f9f7f7;
-    margin: auto;
-    margin-bottom: 2rem;
-    margin-top: 4rem;
-    width: 50% !important;
-  }
-
-  .margen {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    margin-left: 5rem;
-    margin-right: 5rem;
-  }
-</style>
-
 <head />
 
 <Form>
@@ -57,7 +61,10 @@
               id="email"
               placeholder="your@email.com"
               autocomplete="username"
-              bind:value={email} />
+              bind:value={email}
+              on:blur={showInvalidEmail}
+            />
+            <span class="error">{mailError}</span>
           </FormGroup>
           <FormGroup>
             <Label for="password">Password</Label>
@@ -67,7 +74,8 @@
               id="password"
               placeholder="password"
               autocomplete="new-password"
-              bind:value={password} />
+              bind:value={password}
+            />
           </FormGroup>
           <FormGroup>
             <Label for="password">Repeat password</Label>
@@ -77,13 +85,37 @@
               id="password-again"
               placeholder="password"
               autocomplete="new-password"
-              bind:value={passwordAgain} />
+              bind:value={passwordAgain}
+              on:blur={showInvalidPassword}
+            />
+            <span class="error">{passwordError}</span>
           </FormGroup>
         </div>
       </div>
       <div style="text-align:center;">
-        <Button color="primary" on:click={handleRegister} disabled={!passwordOk}>Register</Button>
+        <Button color="primary" on:click={handleRegister} disabled={!passwordOk || !emailOk}>Register</Button>
       </div>
     </div>
   </div>
 </Form>
+
+<style>
+  .tarjeta {
+    background-color: #f9f7f7;
+    margin: auto;
+    margin-bottom: 2rem;
+    margin-top: 4rem;
+    width: 50% !important;
+  }
+
+  .margen {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-left: 5rem;
+    margin-right: 5rem;
+  }
+
+  .error {
+    color: red;
+  }
+</style>
