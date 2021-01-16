@@ -3,14 +3,26 @@
   import { notification, notifier } from '../notifier'
 </script>
 
-<style>
-</style>
-
 {#if $notification}
-  <Toast style="position: absolute; top: 1rem; right: 1rem;">
-    <ToastHeader class={`bg-${$notification.type}`} style="color:white" toggle={() => notifier.clear()}>
-      {$notification.header}
-    </ToastHeader>
-    <ToastBody>{$notification.message}</ToastBody>
-  </Toast>
+  <div class="fixed-top-right">
+    <Toast>
+      <ToastHeader class={`bg-${$notification.type}`} toggle={() => notifier.clear()}>
+        <span class="white-font">
+          {$notification.header}
+        </span>
+      </ToastHeader>
+      <ToastBody>{$notification.message}</ToastBody>
+    </Toast>
+  </div>
 {/if}
+
+<style>
+  .white-font {
+    color: white;
+  }
+  .fixed-top-right {
+    position: absolute;
+    top: 5rem;
+    right: 1rem;
+  }
+</style>

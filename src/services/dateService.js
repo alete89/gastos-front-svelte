@@ -40,7 +40,7 @@ export function monthDiff(d1, d2) {
 }
 
 export const toDate = (dateString) => {
-  var fecha = dateString.split(/\D/)
+  const fecha = dateString.split(/\D/)
   return new Date(Number(fecha[0]), Number(fecha[1]) - 1, Number(fecha[2]))
 }
 

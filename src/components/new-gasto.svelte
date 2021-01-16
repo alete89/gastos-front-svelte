@@ -155,7 +155,7 @@
     <FormGroup>
       <div class="row">
         <div class="col">
-          <Label style="" for="tags">Crear tag</Label>
+          <Label for="tags">Crear tag</Label>
           <Input type="text" name="new-tag" id="new-tag" placeholder="Nombre" bind:value={newTag} />
           <Button style="margin-top:1rem;" color="primary" disabled={!newTag} on:click={nuevoTag}>Crear</Button>
         </div>
