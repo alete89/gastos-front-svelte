@@ -2,12 +2,12 @@
   import { onMount } from 'svelte'
   import { Alert, Badge, FormGroup, Input, Label } from 'sveltestrap'
   import { fetchGastos, fetchTarjetas } from '../services/appService.js'
-  import { fetchAnios, getMeses } from '../services/dateService.js'
+  import { fetchAnios, fetchMeses } from '../services/dateService.js'
 
   let data = []
   let tarjetas = []
   const hoy = new Date()
-  let meses = getMeses()
+  let meses = []
   let anio = hoy.getFullYear()
   let mes = hoy.getMonth()
   let tarjeta
@@ -29,10 +29,23 @@
   onMount(async function () {
     tarjetas = await fetchTarjetas()
     tarjeta = tarjetas[0]
+    await getData()
+  })
+
+  async function getData() {
+    await getAnios()
+    await getMeses()
+    await getGastos()
+  }
+
+  async function getAnios() {
     const aniosConGastos = await fetchAnios(tarjeta)
     anios = [...new Set(aniosConGastos.concat(anio))].sort()
-    await getGastos()
-  })
+  }
+
+  async function getMeses() {
+    meses = await fetchMeses(anio, tarjeta)
+  }
 
   async function getGastos() {
     dataFromServer = await fetchGastos(mes, anio, tarjeta)
@@ -47,23 +60,8 @@
   }
 
   $: filtrarGastos(filterText)
-</script>
 
-<style>
-  .table {
-    text-align: center;
-    background-color: #f9f7f7;
-  }
-  .selectores {
-    background-color: #3f72af;
-    color: white;
-    display: flex;
-    flex-direction: row;
-  }
-  .input {
-    margin: 1rem;
-  }
-</style>
+</script>
 
 <head />
 
@@ -76,7 +74,7 @@
       <div class="input">
         <Label for="tarjetaSelect" />
         <!-- svelte-ignore a11y-no-onchange -->
-        <select bind:value={tarjeta} on:change={getGastos} name="tarjeta" id="tarjetaSelect">
+        <select bind:value={tarjeta} on:change={getData} name="tarjeta" id="tarjetaSelect">
           {#each tarjetas as tarjeta}
             <option value={tarjeta}>{tarjeta.nombre}</option>
           {/each}
@@ -87,7 +85,14 @@
       <FormGroup>
         <Label for="anioSelect" />
         <!-- svelte-ignore a11y-no-onchange -->
-        <select bind:value={anio} on:change={getGastos} name="anio" id="anioSelect">
+        <select
+          bind:value={anio}
+          on:change={async () => {
+            await getMeses()
+            await getGastos()
+          }}
+          name="anio"
+          id="anioSelect">
           {#each anios as anio}
             <option value={anio}>{anio}</option>
           {/each}
@@ -99,8 +104,8 @@
         <Label for="mesSelect" />
         <!-- svelte-ignore a11y-no-onchange -->
         <select bind:value={mes} on:change={getGastos} name="mes" id="mesSelect">
-          {#each meses as mes}
-            <option value={mes.valor}>{mes.descripcion}</option>
+          {#each meses as mes, index}
+            <option class={mes.tieneGastos ? 'negrita' : ''} value={index}>{mes.descripcion}</option>
           {/each}
         </select>
       </div>
@@ -157,3 +162,23 @@
     </table>
   </div>
 </div>
+
+<style>
+  .table {
+    text-align: center;
+    background-color: #f9f7f7;
+  }
+  .selectores {
+    background-color: #3f72af;
+    color: white;
+    display: flex;
+    flex-direction: row;
+  }
+  .input {
+    margin: 1rem;
+  }
+
+  .negrita {
+    font-weight: bold;
+  }
+</style>

@@ -6,29 +6,32 @@ export async function fetchAnios(tarjeta) {
   return anios
 }
 
-export function getMeses() {
-  let meses = [
-    mes('Enero', 0),
-    mes('Febrero', 1),
-    mes('Marzo', 2),
-    mes('Abril', 3),
-    mes('Mayo', 4),
-    mes('Junio', 5),
-    mes('Julio', 6),
-    mes('Agosto', 7),
-    mes('Septiembre', 8),
-    mes('Octubre', 9),
-    mes('Noviembre', 10),
-    mes('Diciembre', 11),
-  ]
+export const fetchMeses = async (anio, tarjeta) => {
+  const response = await fetch(`${backendUrl}/meses/${anio}/tarjeta/${tarjeta.id}`)
+  if (!response.ok) {
+    return mesesDefault
+  }
+  const meses = await response.json()
   return meses
 }
 
-function mes(descripcion, valor) {
-  let mes = {}
-  mes.descripcion = descripcion
-  mes.valor = valor
-  return mes
+const mesesDefault = [
+  mes('Enero'),
+  mes('Febrero'),
+  mes('Marzo'),
+  mes('Abril'),
+  mes('Mayo'),
+  mes('Junio'),
+  mes('Julio'),
+  mes('Agosto'),
+  mes('Septiembre'),
+  mes('Octubre'),
+  mes('Noviembre'),
+  mes('Diciembre'),
+]
+
+function mes(descripcion) {
+  return { descripcion, tieneGastos: false }
 }
 
 export function monthDiff(d1, d2) {
