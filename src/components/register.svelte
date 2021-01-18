@@ -8,28 +8,12 @@
   let email = ''
   let password = ''
   let passwordAgain = ''
-  let mailError = ''
-  let passwordError = ''
-
+  const errors = {}
   const schema = Joi.string().email({ tlds: { allow: false } })
 
   $: passwordOk = password === passwordAgain && password != ''
 
   $: emailOk = !schema.validate(email).error
-
-  const showInvalidEmail = () => {
-    mailError = ''
-    if (!emailOk) {
-      mailError = 'ingrese un email válido'
-    }
-  }
-
-  const showInvalidPassword = () => {
-    passwordError = ''
-    if (!passwordOk) {
-      passwordError = 'las passwords deben coincidir'
-    }
-  }
 
   async function handleRegister(e) {
     console.log(email, password)
@@ -62,9 +46,11 @@
               placeholder="your@email.com"
               autocomplete="username"
               bind:value={email}
-              on:blur={showInvalidEmail}
+              on:blur={() => {
+                errors.email = !emailOk
+              }}
             />
-            <span class="error">{mailError}</span>
+            <span class="error">{errors.email ? 'ingrese un email válido' : ''}</span>
           </FormGroup>
           <FormGroup>
             <Label for="password">Password</Label>
@@ -86,9 +72,11 @@
               placeholder="password"
               autocomplete="new-password"
               bind:value={passwordAgain}
-              on:blur={showInvalidPassword}
+              on:blur={() => {
+                errors.password = !passwordOk
+              }}
             />
-            <span class="error">{passwordError}</span>
+            <span class="error">{errors.password ? 'las passwords deben coincidir' : ''}</span>
           </FormGroup>
         </div>
       </div>
