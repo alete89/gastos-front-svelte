@@ -54,34 +54,10 @@
   }
 </script>
 
-<style>
-  .tarjeta {
-    background-color: #f9f7f7;
-    margin: auto;
-    margin-bottom: 2rem;
-    margin-top: 4rem;
-    width: 50% !important;
-  }
-  .titulo {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: bold;
-    background-color: #112d4e;
-    color: white;
-  }
-
-  .margen {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    margin-left: 5rem;
-    margin-right: 5rem;
-  }
-</style>
-
-<head />
-
 <div class="card tarjeta">
-  <div class="card-header titulo">Nuevo gasto</div>
+  <div class="titulo">
+    <div class="card-header">Nuevo gasto</div>
+  </div>
   <div class="margen">
     <div class="row">
       <div class="col">
@@ -106,7 +82,8 @@
             name="monto_total"
             id="monto_total"
             placeholder="Monto total"
-            bind:value={gasto.monto_total} />
+            bind:value={gasto.monto_total}
+          />
         </FormGroup>
       </div>
       <div class="col">
@@ -157,7 +134,7 @@
         <div class="col">
           <Label for="tags">Crear tag</Label>
           <Input type="text" name="new-tag" id="new-tag" placeholder="Nombre" bind:value={newTag} />
-          <Button style="margin-top:1rem;" color="primary" disabled={!newTag} on:click={nuevoTag}>Crear</Button>
+          <Button style="margin-top:1rem" color="primary" disabled={!newTag} on:click={nuevoTag}>Crear</Button>
         </div>
         <div class="col">
           <Label for="tags">Tags</Label>
@@ -175,7 +152,7 @@
       <Label for="exampleText">Comentario</Label>
       <Input bind:value={gasto.comentario} type="textarea" name="text" id="comentarioInput" />
     </FormGroup>
-    <div style="text-align:center;">
+    <div class="texto-centrado">
       <Button color="primary" disabled={!gasto.esValido()} on:click={handleSubmit}>Crear Gasto</Button>
     </div>
   </div>

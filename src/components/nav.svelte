@@ -10,13 +10,15 @@
 </script>
 
 <head>
+
   <style>
-    a {
-      color: white !important;
+    a, a:visited {
+      color: white;
       margin-left: 1rem;
     }
   </style>
-</head>
+
+  </head>
 
 <Navbar color="dark" class="mb-2 sasa">
   <NavbarBrand to="/">Gastos</NavbarBrand>

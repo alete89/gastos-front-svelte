@@ -118,7 +118,7 @@
   </section>
 
   <div class="table-responsive">
-    <table class="table table-bordered table-hover">
+    <table class="table texto-centrado table-bordered table-hover">
       <thead class="thead-dark">
         <tr>
           <th>#</th>
@@ -164,10 +164,6 @@
 </div>
 
 <style>
-  .table {
-    text-align: center;
-    background-color: #f9f7f7;
-  }
   .selectores {
     background-color: #3f72af;
     color: white;

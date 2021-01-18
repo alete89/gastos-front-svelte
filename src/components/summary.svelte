@@ -15,25 +15,12 @@
 </script>
 
 <style>
-  .table {
-    text-align: center;
-    background-color: #f9f7f7;
-  }
-
-  .titulo {
-    text-align: center;
-  }
-
-  .margen {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-  }
 </style>
 
 <div class="container margen">
-  <h2 class="titulo"><strong>Summary</strong></h2>
+  <h2 class="texto-centrado"><strong>Summary</strong></h2>
   <div class="table-responsive">
-    <table class="table table-bordered table-hover">
+    <table class="table texto-centrado table-bordered table-hover">
       <thead class="thead-dark">
         <tr>
           <th>Tarjeta</th>

@@ -23,34 +23,12 @@
   // $: disabled = !tarjeta.esValido()
 </script>
 
-<style>
-  .tarjeta {
-    background-color: #f9f7f7;
-    margin: auto;
-    margin-bottom: 2rem;
-    margin-top: 4rem;
-    width: 20% !important;
-  }
-  .titulo {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: bold;
-    background-color: #112d4e;
-    color: white;
-  }
-
-  .margen {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    margin-left: 3rem;
-    margin-right: 3rem;
-  }
-</style>
-
 <head />
 
 <div class="card tarjeta">
-  <div class="card-header titulo">Nueva tarjeta</div>
+  <div class="titulo">
+    <div class="card-header">Nueva tarjeta</div>
+  </div>
   <div class="margen">
     <div class="row">
       <div class="col">
@@ -118,8 +96,14 @@
         </FormGroup>
       </div>
     </div>
-    <div style="text-align:center;">
+    <div class="texto-centrado">
       <Button color="primary" disabled={!tarjeta.nombre} on:click={handleSubmit}>Crear tarjeta</Button>
     </div>
   </div>
 </div>
+
+<style>
+  .tarjeta {
+    width: 20%;
+  }
+</style>

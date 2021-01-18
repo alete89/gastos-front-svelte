@@ -22,25 +22,6 @@
   }
 </script>
 
-<style>
-  .tarjeta {
-    background-color: #f9f7f7;
-    margin: auto;
-    margin-bottom: 2rem;
-    margin-top: 4rem;
-    width: 50% !important;
-  }
-
-  .margen {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    margin-left: 5rem;
-    margin-right: 5rem;
-  }
-</style>
-
-<head />
-
 <div class="card tarjeta">
   <div class="margen">
     <div class="row">
@@ -57,7 +38,7 @@
         </FormGroup>
       </div>
     </div>
-    <div style="text-align:center;">
+    <div class="texto-centrado">
       <Button color="primary" on:click={handleLogin}>Login</Button>
     </div>
   </div>
