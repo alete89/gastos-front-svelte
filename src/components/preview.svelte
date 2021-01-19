@@ -40,7 +40,7 @@
 
   async function getAnios(tarjeta) {
     const aniosConGastos = await fetchAnios(tarjeta)
-    anios = [...new Set(aniosConGastos.concat(hoy.getFullYear()))].sort()
+    anios = [...new Set(aniosConGastos.concat(hoy.getFullYear(), anio))].sort()
   }
 
   async function getMeses(anio, tarjeta) {
@@ -60,7 +60,6 @@
   }
 
   $: filtrarGastos(filterText)
-
 </script>
 
 <head />
