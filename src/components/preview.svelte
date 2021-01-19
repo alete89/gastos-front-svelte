@@ -33,21 +33,21 @@
   })
 
   async function getData() {
-    await getAnios()
-    await getMeses()
-    await getGastos()
+    await getAnios(tarjeta)
+    await getMeses(anio, tarjeta)
+    await getGastos(mes, anio, tarjeta)
   }
 
-  async function getAnios() {
+  async function getAnios(tarjeta) {
     const aniosConGastos = await fetchAnios(tarjeta)
     anios = [...new Set(aniosConGastos.concat(anio))].sort()
   }
 
-  async function getMeses() {
+  async function getMeses(anio, tarjeta) {
     meses = await fetchMeses(anio, tarjeta)
   }
 
-  async function getGastos() {
+  async function getGastos(mes, anio, tarjeta) {
     dataFromServer = await fetchGastos(mes, anio, tarjeta)
     data = [...dataFromServer]
   }
@@ -88,8 +88,8 @@
         <select
           bind:value={anio}
           on:change={async () => {
-            await getMeses()
-            await getGastos()
+            await getMeses(anio, tarjeta)
+            await getGastos(mes, anio, tarjeta)
           }}
           name="anio"
           id="anioSelect">
@@ -103,7 +103,7 @@
       <div class="input">
         <Label for="mesSelect" />
         <!-- svelte-ignore a11y-no-onchange -->
-        <select bind:value={mes} on:change={getGastos} name="mes" id="mesSelect">
+        <select bind:value={mes} on:change={async () => await getGastos(mes, anio, tarjeta)} name="mes" id="mesSelect">
           {#each meses as mes, index}
             <option class={mes.tieneGastos ? 'negrita' : ''} value={index}>{mes.descripcion}</option>
           {/each}
