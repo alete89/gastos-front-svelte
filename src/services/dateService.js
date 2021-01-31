@@ -1,13 +1,13 @@
-import { backendUrl } from '../constants'
+import { fetchDefaults } from './fetchDefaults'
 
 export async function fetchAnios(tarjeta) {
-  const response = await fetch(`${backendUrl}/anios/${tarjeta.id}`)
+  const response = await fetchDefaults(`/anios/${tarjeta.id}`)
   const anios = await response.json()
   return anios
 }
 
 export const fetchMeses = async (anio, tarjeta) => {
-  const response = await fetch(`${backendUrl}/meses/${anio}/tarjeta/${tarjeta.id}`)
+  const response = await fetchDefaults(`/meses/${anio}/tarjeta/${tarjeta.id}`)
   if (!response.ok) {
     return mesesDefault
   }

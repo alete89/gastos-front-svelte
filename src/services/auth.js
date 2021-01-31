@@ -1,19 +1,10 @@
-// import { getAccessToken, setAccessToken } from '../accessToken'
-import { backendUrl } from '../constants'
-import { get } from 'svelte/store'
 import { accessToken } from '../accessToken'
-
-// const at = get(accessToken)
-
-var at
-accessToken.subscribe(async (value) => {
-  at = await value
-})
+import { backendUrl } from '../constants'
+import { fetchDefaults } from './fetchDefaults'
 
 export const register = async ({ email, password }) => {
   const response = await fetch(`${backendUrl}/register`, {
     method: 'POST',
-    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -28,35 +19,26 @@ export const register = async ({ email, password }) => {
 export const login = async ({ email, password }) => {
   const response = await fetch(`${backendUrl}/login`, {
     method: 'POST',
-    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ email, password }),
   })
 
-  if(!response.ok) {
+  if (!response.ok) {
     throw "Login incorrecto"
   }
-  
-  accessToken.update(async (current) => {
-    return await response.json()
-  })
+
+  accessToken.set(await response.json())
 
   // setAccessToken(accessToken)
   // console.log(accessToken)
-  console.log(at)
+  // console.log(at)
   return response
 }
 
 export const validate = async () => {
-  // const accessToken = getAccessToken()
-  const response = await fetch(`${backendUrl}/validate`, {
-    headers: {
-      // authorization: accessToken ? `bearer ${accessToken}` : '',
-      authorization: at ? `bearer ${at}` : '',
-    },
-  })
+  const response = await fetchDefaults(`/validate`)
   const json = await response.json()
   return json
 }
@@ -73,10 +55,8 @@ export const refreshToken = async () => {
 }
 
 export const logout = async () => {
-  const response = await fetch(`${backendUrl}/logout`, {
+  const response = await fetchDefaults(`/logout`, {
     method: 'POST',
-    credentials: 'include',
   })
-  accessToken.update((current) => null)
+  accessToken.set(null)
 }
-
