@@ -19,6 +19,7 @@ export const register = async ({ email, password }) => {
 export const login = async ({ email, password }) => {
   const response = await fetch(`${backendUrl}/login`, {
     method: 'POST',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -31,9 +32,6 @@ export const login = async ({ email, password }) => {
 
   accessToken.set(await response.json())
 
-  // setAccessToken(accessToken)
-  // console.log(accessToken)
-  // console.log(at)
   return response
 }
 
@@ -57,6 +55,7 @@ export const refreshToken = async () => {
 export const logout = async () => {
   const response = await fetchDefaults(`/logout`, {
     method: 'POST',
+    credentials:'include'
   })
-  accessToken.set(null)
+  
 }

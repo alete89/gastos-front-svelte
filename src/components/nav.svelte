@@ -1,10 +1,14 @@
 <script>
-  import { Link, Router } from 'svelte-navigator'
+  import { Link, Router, navigate } from 'svelte-navigator'
   import { Nav, Navbar, NavbarBrand } from 'sveltestrap'
   import { accessToken } from '../accessToken'
   import { logout } from '../services/auth'
 
   const handleLogout = async () => {
+    accessToken.set(null)
+    navigate('/login', {
+      replace: true,
+    })
     await logout()
   }
 </script>
