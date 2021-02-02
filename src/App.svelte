@@ -1,10 +1,23 @@
 <script>
-  import Routes from './Routes.svelte'
+  import { onMount } from 'svelte'
   import Nav from './components/nav.svelte'
+  import Routes from './Routes.svelte'
+  import { refreshToken } from './services/auth'
+
+  let loading = true
+
+  onMount(async () => {
+    await refreshToken()
+    loading = false
+  })
 </script>
 
-<Nav />
-<Routes />
+{#if loading}
+  loading
+{:else}
+  <Nav />
+  <Routes />
+{/if}
 
 <style>
 </style>

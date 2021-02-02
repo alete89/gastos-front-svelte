@@ -47,9 +47,7 @@ export const refreshToken = async () => {
     credentials: 'include',
   })
   const { accessToken: newAccessToken } = await response.json()
-  accessToken.update(async (current) => {
-    return newAccessToken
-  })
+  accessToken.set(newAccessToken)
 }
 
 export const logout = async () => {
