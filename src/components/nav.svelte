@@ -1,15 +1,12 @@
 <script>
-  import { Link, Router, navigate } from 'svelte-navigator'
+  import { Link, Router } from 'svelte-navigator'
   import { Nav, Navbar, NavbarBrand } from 'sveltestrap'
   import { accessToken } from '../accessToken'
   import { logout } from '../services/auth'
 
   const handleLogout = async () => {
-    accessToken.set(null)
-    navigate('/login', {
-      replace: true,
-    })
     await logout()
+    accessToken.set(null)
   }
 </script>
 
@@ -36,7 +33,7 @@
         <Link to="/register">Register?</Link>
       {/if}
       {#if $accessToken}
-        <Link on:click={handleLogout} to="/">Logout</Link>
+        <Link on:click={handleLogout} to="/login">Logout</Link>
         <Link to="/tarjetas">Tarjetas</Link>
       {/if}
     </Router>
