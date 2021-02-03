@@ -56,3 +56,7 @@ export function agregarCero(dia) {
   if (dia < 10) return `0${dia}`
   else return dia
 }
+
+export function addMinutes(date, minutes) {
+  return new Date(date.getTime() + minutes * 60000);
+}

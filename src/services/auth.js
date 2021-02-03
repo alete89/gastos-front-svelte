@@ -48,6 +48,7 @@ export const refreshToken = async () => {
   })
   const { accessToken: newAccessToken } = await response.json()
   accessToken.set(newAccessToken)
+  return newAccessToken
 }
 
 export const logout = async () => {
