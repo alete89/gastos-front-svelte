@@ -1,13 +1,13 @@
-import { fetchDefaults } from './fetchDefaults'
+import { authFetch } from './authFetch'
 
 export async function fetchAnios(tarjeta) {
-  const response = await fetchDefaults(`/anios/${tarjeta.id}`)
+  const response = await authFetch(`/anios/${tarjeta.id}`)
   const anios = await response.json()
   return anios
 }
 
 export const fetchMeses = async (anio, tarjeta) => {
-  const response = await fetchDefaults(`/meses/${anio}/tarjeta/${tarjeta.id}`)
+  const response = await authFetch(`/meses/${anio}/tarjeta/${tarjeta.id}`)
   if (!response.ok) {
     return mesesDefault
   }

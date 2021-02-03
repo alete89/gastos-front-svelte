@@ -1,6 +1,6 @@
 import { accessToken } from '../accessToken'
 import { backendUrl } from '../constants'
-import { fetchDefaults } from './fetchDefaults'
+import { authFetch } from './authFetch'
 
 export const register = async ({ email, password }) => {
   const response = await fetch(`${backendUrl}/register`, {
@@ -36,7 +36,7 @@ export const login = async ({ email, password }) => {
 }
 
 export const validate = async () => {
-  const response = await fetchDefaults(`/validate`)
+  const response = await authFetch(`/validate`)
   const json = await response.json()
   return json
 }
@@ -51,7 +51,7 @@ export const refreshToken = async () => {
 }
 
 export const logout = async () => {
-  const response = await fetchDefaults(`/logout`, {
+  const response = await authFetch(`/logout`, {
     method: 'POST',
     credentials:'include'
   })

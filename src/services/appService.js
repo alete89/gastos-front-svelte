@@ -1,27 +1,27 @@
 import Gasto from '../domain/gasto'
-import { fetchDefaults } from './fetchDefaults'
+import { authFetch } from './authFetch'
 
 export async function fetchMonedas() {
-  const response = await fetchDefaults(`/monedas`)
+  const response = await authFetch(`/monedas`)
   const monedas = await response.json()
   return monedas
 }
 
 export async function fetchTarjetas() {
   // console.log("pide tarjetas desde front")
-  const response = await fetchDefaults(`/tarjetas`)
+  const response = await authFetch(`/tarjetas`)
   const tarjetas = await response.json()
   return tarjetas
 }
 
 export async function fetchTags() {
-  const response = await fetchDefaults(`/tags`)
+  const response = await authFetch(`/tags`)
   const tags = await response.json()
   return tags
 }
 
 export async function crearTag(tag) {
-  const response = await fetchDefaults(`/tags/new`, {
+  const response = await authFetch(`/tags/new`, {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -35,7 +35,7 @@ export async function fetchGastos(mes, anio, tarjeta) {
   json.mes = mes
   json.anio = anio
   json.id_tarjeta = tarjeta.id
-  const response = await fetchDefaults(`/gastos/mes`, {
+  const response = await authFetch(`/gastos/mes`, {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -56,7 +56,7 @@ export async function crearGasto(gasto) {
   gasto.anio = fecha.getFullYear()
   gasto.mes = fecha.getMonth()
   gasto.dia = fecha.getDate() + 1
-  const response = await fetchDefaults(`/gasto`, {
+  const response = await authFetch(`/gasto`, {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -66,7 +66,7 @@ export async function crearGasto(gasto) {
 }
 
 export async function crearTarjeta(tarjeta) {
-  const response = await fetchDefaults(`/tarjeta`, {
+  const response = await authFetch(`/tarjeta`, {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -76,7 +76,7 @@ export async function crearTarjeta(tarjeta) {
 }
 
 export async function getTotales() {
-  const response = await fetchDefaults(`/summary`)
+  const response = await authFetch(`/summary`)
   const totales = await response.json()
   return totales
 }

@@ -13,6 +13,6 @@ const addAuthHeader = (options) => {
     return options
 }
 
-export const fetchDefaults = (url = '', options = {}) => {
+export const authFetch = (url = '', options = {}) => {
     return fetch(backendUrl + url, addAuthHeader(options));
 }
